@@ -9,7 +9,7 @@ Our official python wrapper for API 2.0
   * [User API Calls](#user-api-calls)
       * [Get All Users](#get-all-users)
       * [Create User](#create-user)
-      * [Check User Exists](#check-user-exists)
+      * [Check User Exists](#check-if-user-exists)
       * [Get Groups for User](#get-groups-for-user)
       * [Delete User](#delete-user)
   * [Group API Calls](#group-api-calls)
@@ -17,13 +17,12 @@ Our official python wrapper for API 2.0
       * [Create Group](#create-group)
       * [Get Group](#get-group)
       * [Delete Group](#delete-group)
-      * [Check Group Exists](#check-group-exists)
+      * [Check Group Exists](#check-if-group-exists)
       * [Add User to Group](#add-user-to-group)
       * [Remove User from Group](#remove-user-from-group)      
   * [Enrollment API Calls](#enrollment-api-calls)
       * [Get All Enrollments for User](#get-all-enrollments-for-user)
       * [Get Face Enrollments for User](#get-face-enrollments-for-user)
-      * [Delete All Enrollments for User](#delete-all-enrollments-for-user)
       * [Delete Enrollment for User](#delete-enrollment-for-user)
       * [Delete Face Enrollment](#delete-face-enrollment)
       * [Create Voice Enrollment](#create-voice-enrollment)
@@ -157,6 +156,17 @@ Gets all enrollment for user with given userId(begins with 'usr_')
 ```python
 voiceitPython.get_all_enrollments_for_user("USER_ID_HERE")
 ```
+### Get Face Enrollments For User
+Get all face enrollments for the user
+```
+voiceitPython.get_face_enrollments_for_user("USER_ID_HERE"):
+```
+
+### Create Face Enrollment
+Creates a face enrollment for user
+```
+voiceitPython.create_face_enrollment("USER_ID", "LANG_CODE", "FILE_PATH")
+```
 
 #### Delete Enrollment for User
 
@@ -164,6 +174,13 @@ Delete enrollment for user with given userId(begins with 'usr_') and enrollmentI
 
 ```python
 voiceitPython.delete_enrollment_for_user( "USER_ID_HERE", "ENROLLMENT_ID_HERE")
+```
+
+### Delete Face Enrollment 
+Delete a Face enrollemnt for User
+
+```
+voiceitPython.delete_face_enrollment(self, "USER_ID_HERE", "FACE_ENROLLMENT_ID_HERE")
 ```
 
 #### Create Voice Enrollment
@@ -174,12 +191,27 @@ Create audio enrollment for user with given userId(begins with 'usr_') and conte
 voiceitPython.create_voice_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording);
 ```
 
+### Create Voice Enrollment By URL
+Creates a voice enrollment for the user using a provided URL 
+
+```
+voiceitPython.create_voice_enrollment_by_url("USER_ID_HERE", "LANG_CODE", "URL_TO_AUDIO")
+```
+
 #### Create Video Enrollment
 
 Create video enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```python
-voiceitPython.create_video_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video);
+voiceitPython.create_video_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH", blink_detection=false);
+```
+
+#### Create Video Enrollment By URL
+
+Create video enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.) by the URL provided. Note: Recording needs to be no less than 1.2 seconds and no more than 5 seconds
+
+```python
+voiceitPython.create_video_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "VIDEO_URL", blink_detection=false);
 ```
 
 ### Verification API Calls
@@ -197,6 +229,11 @@ voiceitPython.voice_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[]
 Verify user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 ```python
 voiceitPython.video_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
+```
+### Face Verification 
+Verify the person using a video
+```
+voiceitPython.face_verification("USER_ID", "FILE_PATH", bink_detection = false)
 ```
 
 ### Identification API Calls

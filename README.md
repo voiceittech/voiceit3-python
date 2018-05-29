@@ -52,6 +52,12 @@ Please make sure that you have python3 installed. This wrapper uses the requests
 ```
 pip3 intall requests
 ```
+Use pip to install the module 
+
+```
+pip3 install voiceit2
+```
+
 ### API calls
 
 ### Initialization

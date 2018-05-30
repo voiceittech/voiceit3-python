@@ -192,7 +192,7 @@ voiceitPython.delete_face_enrollment(self, "USER_ID_HERE", "FACE_ENROLLMENT_ID_H
 Create audio enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```python
-voiceitPython.create_voice_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording);
+voiceitPython.create_voice_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH");
 ```
 
 ### Create Voice Enrollment By URL
@@ -225,14 +225,14 @@ voiceitPython.create_video_enrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "
 Verify user with the given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```python
-voiceitPython.voice_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
+voiceitPython.voice_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH")
 ```
 
 #### Video Verification
 
 Verify user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 ```python
-voiceitPython.video_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
+voiceitPython.video_verification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH")
 ```
 ### Face Verification 
 Verify the person using a video
@@ -247,7 +247,7 @@ voiceitPython.face_verification("USER_ID", "FILE_PATH", bink_detection = false)
 Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```python
-voiceitPython.voice_identification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
+voiceitPython.voice_identification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH")
 ```
 
 #### Video Identification
@@ -255,7 +255,7 @@ voiceitPython.voice_identification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byt
 Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```java
-voiceitPython.video_identification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
+voiceitPython.video_identification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", "FILE_PATH")
 ```
 
 ## Author

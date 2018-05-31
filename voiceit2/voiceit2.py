@@ -135,7 +135,7 @@ class VoiceIt2:
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_face_enrollment(self, user_id, lang, file_path, blink_detection=False):
+    def create_face_enrollment(self, user_id, file_path, blink_detection=False):
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['doBlinkDetection'] = blink_detection

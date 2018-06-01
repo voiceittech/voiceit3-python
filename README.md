@@ -49,11 +49,11 @@ Sign up for a free Developer Account at [voiceit.io](https://voiceit.io/signup) 
 ## Installation
 Please make sure that you have python3 installed. This wrapper uses the requests library:
 ```
-sudo pip3 intall requests
+pip3 intall requests
 ```
 The module can be installed using pip
 ```
-sudo pip3 install voiceit2
+pip3 install voiceit2
 ```
 ### API calls
 

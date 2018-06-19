@@ -63,9 +63,9 @@ class VoiceIt2:
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_group(self, group_desc, group_name ):
+    def create_group(self, group_desc):
         dataObj = {}
-        dataObj[group_desc] = group_name
+        dataObj['description'] = group_desc
         try:
             response = requests.post(self.base_URL + 'groups', auth=self.voiceit_basic_auth_credentials, data = dataObj)
             return response.json()

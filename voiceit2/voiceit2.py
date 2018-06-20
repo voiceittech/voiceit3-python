@@ -268,9 +268,9 @@ class VoiceIt2:
         dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['doBlinkDetection'] = blink_detection
-        filesObj = [('recording', ('identification.wav', open(file_path, 'rb'), 'audio/wav'))]
+        filesObj = [('video', ('video.mp4', open(file_path, 'rb'), 'video/mp4'))]
         try:
-            response = requests.post(self.base_URL + 'identification', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj)
+            response = requests.post(self.base_URL + 'identification/video', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
@@ -282,7 +282,7 @@ class VoiceIt2:
         dataObj['fileUrl'] = file_Url
         dataObj['doBlinkDetection'] = blink_detection
         try:
-            response = requests.post(self.base_URL+ '/identification/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj)
+            response = requests.post(self.base_URL+ '/identification/video/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()

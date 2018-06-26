@@ -170,6 +170,13 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
+    def delete_all_enrollments_for_user(self, user_id):
+        try:
+            response = requests.delete(self.base_URL + 'enrollments/' + user_id + '/all', auth=self.voiceit_basic_auth_credentials)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+                return e.read()
+
     def delete_face_enrollment(self, user_id, face_enrollment_id):
         try:
             response = requests.delete(self.base_URL + 'enrollments/face/' + user_id + '/'+ face_enrollment_id, auth=self.voiceit_basic_auth_credentials)

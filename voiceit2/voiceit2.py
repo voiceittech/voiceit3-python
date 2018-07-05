@@ -21,7 +21,7 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def get_user(self, user_id):
+    def check_user_exists(self, user_id):
         try:
             response = requests.get(self.base_URL+'users/'+user_id, auth=self.voiceit_basic_auth_credentials)
             return response.json()

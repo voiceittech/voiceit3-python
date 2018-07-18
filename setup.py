@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
  name = 'voiceit2',
- version = '1.0.5',
+ version = '1.0.6',
  description = 'VoiceIt API 2.0 Python Wrapper',
  author = 'Hassan Ismaeel',
  author_email = 'hassan@voiceit.io',

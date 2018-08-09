@@ -7,7 +7,7 @@ addons:
 python:
 - 3.6
 before_script:
-- sudo -H pip3 install --upgrade pip distutils setuptools && pip3 install requests
+- sudo -H pip3 install --upgrade pip && pip3 install --upgrade distutils pip3 install --upgrade setuptools && pip3 install requests
 script: python3 tests.py
 notifications:
   slack:

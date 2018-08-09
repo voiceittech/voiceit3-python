@@ -294,6 +294,7 @@ class TestVoiceIt2(unittest.TestCase):
 
         #  Test Face Enrollments
         ret = my_voiceit.create_face_enrollment(user_id, './https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan1.mp4')
+
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         ret = my_voiceit.create_face_enrollment(user_id, 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan2.mp4')

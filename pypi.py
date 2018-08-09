@@ -19,6 +19,7 @@ new_setup_string = old_setup_string.replace(original_version, new_version)
 with open('./setup.py', 'w') as setup:
     setup.write(new_setup_string)
 
+"""
 #  Push changes back to github
 
 githubaccesstoken = os.environ['GITHUBACCESSTOKEN']
@@ -54,3 +55,4 @@ with open('~/.pypirc', "w") as pypirc:
     pypirc.write(pypistring)
 
 subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
+"""

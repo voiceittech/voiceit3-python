@@ -5,6 +5,7 @@ import urllib
 
 class TestVoiceIt2(unittest.TestCase):
     def setUp(self):
+        """
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan1.mov', 'videoEnrollmentArmaan1.mov')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan2.mov', 'videoEnrollmentArmaan2.mov')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan3.mov', 'videoEnrollmentArmaan3.mov')
@@ -19,12 +20,14 @@ class TestVoiceIt2(unittest.TestCase):
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen1.wav', 'enrollmentStephen1.wav')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen2.wav', 'enrollmentStephen2.wav')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen3.wav', 'enrollmentStephen3.wav')
+        """
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan1.mp4', 'faceEnrollmentArmaan1.mp4')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan2.mp4', 'faceEnrollmentArmaan2.mp4')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan3.mp4', 'faceEnrollmentArmaan3.mp4')
         urllib.request.urlretrieve('https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationArmaan1.mp4', 'faceVerificationArmaan1.mp4')
-#
-#
+
+
+    """
     def tearDown(self):
         os.remove('./videoEnrollmentArmaan1.mov')
         os.remove('./videoEnrollmentArmaan2.mov')
@@ -281,6 +284,7 @@ class TestVoiceIt2(unittest.TestCase):
         my_voiceit.delete_user(user_id2)
         my_voiceit.delete_group(group_id)
 
+"""
     def face(self): # Create face enrollment, verify, identify
         vikey = os.environ['VIAPIKEY']
         vitoken = os.environ['VIAPITOKEN']

@@ -1,6 +1,8 @@
 language: python3
 python:
 - 3.6
+before_script:
+- pip3 install requests
 script: python3 tests.py
 notifications:
   slack:

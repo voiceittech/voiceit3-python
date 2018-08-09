@@ -73,9 +73,8 @@ pypistring = '''[distutils]
 index-servers = pypi
 
 [pypi]
-repository = https://pypi.org
-username = "''' + pypiusername + '''"
-password = "''' + pypipassword + '''"'''
+username:''' + pypiusername + '''
+password:''' + pypipassword
 
 with open(str(os.path.expanduser("~")+"/") + "/.pypirc", "w") as pypirc:
     pypirc.write(pypistring)

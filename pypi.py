@@ -53,17 +53,17 @@ with open('./setup.py', 'w') as setup:
     setup.write(setup_string)
 
 #  Draft new release using Github REST API
-#  githubusername = os.environ['GITHUBUSERNAME']
-#  githubpassword = os.environ['GITHUBPASSWORD']
-#
-#  release_json = {'tag_name': new_version, 'target_commitish': 'master', 'name': new_version, 'body': '', 'draft': False, 'prerelease': False}
-#
-#  try:
-    #  response = requests.post('https://api.github.com/repos/voiceittech/voiceit2-python/releases', auth=(githubusername, githubpassword), data=json.dumps(release_json))
-    #  print(response.text)
-#  except  requests.exceptions.HTTPError as e:
-    #  print(e.read())
-    #  exit(1)
+githubusername = os.environ['GITHUBUSERNAME']
+githubpassword = os.environ['GITHUBPASSWORD']
+
+release_json = {'tag_name': new_version, 'target_commitish': 'master', 'name': new_version, 'body': '', 'draft': False, 'prerelease': False}
+
+try:
+    response = requests.post('https://api.github.com/repos/voiceittech/voiceit2-python/releases', auth=(githubusername, githubpassword), data=json.dumps(release_json))
+    print(response.text)
+except  requests.exceptions.HTTPError as e:
+    print(e.read())
+    exit(1)
 
 #  Update PyPi with newest package
 pypiusername = os.environ['PYPIUSERNAME']

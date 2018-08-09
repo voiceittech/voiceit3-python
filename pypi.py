@@ -1,3 +1,4 @@
+import os
 import sys
 import requests
 from pip._internal import commands

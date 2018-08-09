@@ -1,7 +1,9 @@
 import os
+import json
 import sys
 import requests
 from pip._internal import commands
+from pathlib import Path
 
 
 #  grab the latest version number of voiceit2 package from pip
@@ -58,7 +60,7 @@ githubpassword = os.environ['GITHUBPASSWORD']
 release_json = {'tag_name': new_version, 'target_commitish': 'master', 'name': new_version, 'body': '', 'draft': False, 'prerelease': False}
 
 try:
-    response = requests.post('https://api.github.com/repos/voiceittech/voiceit2-python/releases', auth=(githubusername, githubpassword), params=release_json)
+    response = requests.post('https://api.github.com/repos/voiceittech/voiceit2-python/releases', auth=(githubusername, githubpassword), params=json.dumps(release_json))
     print(response.text)
 except  requests.exceptions.HTTPError as e:
     print(e.read())
@@ -70,7 +72,7 @@ pypipassword = os.environ['PYPIPASSWORD']
 
 pypistring = '[distutils]\nindex-servers = pypi\n\n[pypi]\nrepository = https://pypi.python.org/pypi\nusername = ' + pypiusername+ '\npassword = ' + pypipassword
 
-with open('~/.pypirc', "w") as pypirc:
+with open(str(Path.home()) + '/.pypirc', "w") as pypirc:
     pypirc.write(pypistring)
 
 subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])

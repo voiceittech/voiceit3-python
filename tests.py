@@ -116,12 +116,15 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.create_video_enrollment(user_id1, 'en-US', './videoEnrollmentArmaan1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment1 = ret['id']
         ret = my_voiceit.create_video_enrollment(user_id1, 'en-US', './videoEnrollmentArmaan2.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment2 = ret['id']
         ret = my_voiceit.create_video_enrollment(user_id1, 'en-US', './videoEnrollmentArmaan3.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment3 = ret['id']
         ret = my_voiceit.create_video_enrollment(user_id2, 'en-US', './videoEnrollmentStephen1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
@@ -143,7 +146,16 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id1, ret['userId'])
 
-        my_voiceit.delete_all_enrollments_for_user(user_id1)
+        #  Delete enrollment
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment1)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment3)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
         my_voiceit.delete_all_enrollments_for_user(user_id2)
 
         #  Check video enrollments by URL
@@ -209,12 +221,15 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.create_voice_enrollment(user_id1, 'en-US', './enrollmentArmaan1.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment1 = ret['id']
         ret = my_voiceit.create_voice_enrollment(user_id1, 'en-US', './enrollmentArmaan2.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment2 = ret['id']
         ret = my_voiceit.create_voice_enrollment(user_id1, 'en-US', './enrollmentArmaan3.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        enrollment3 = ret['id']
         ret = my_voiceit.create_voice_enrollment(user_id2, 'en-US', './videoEnrollmentStephen1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
@@ -239,7 +254,16 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id1, ret['userId'])
 
-        my_voiceit.delete_all_enrollments_for_user(user_id1)
+        #  Delete enrollment
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment1)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment3)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
         my_voiceit.delete_all_enrollments_for_user(user_id2)
 
 
@@ -270,7 +294,6 @@ class TestVoiceIt2(unittest.TestCase):
         
         #  Test Voice Identification by URL
         ret = my_voiceit.voice_identification_by_url(group_id, 'en-US', 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationArmaan1.wav')
-        print(ret)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id1, ret['userId'])
@@ -294,20 +317,40 @@ class TestVoiceIt2(unittest.TestCase):
 
         #  Test Face Enrollments
         ret = my_voiceit.create_face_enrollment(user_id, './https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan1.mp4')
-
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        faceId1 = ret['faceEnrollmentId']
         ret = my_voiceit.create_face_enrollment(user_id, 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan2.mp4')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        faceId2 = ret['faceEnrollmentId']
         ret = my_voiceit.create_face_enrollment(user_id, 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan3.mp4')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+        faceId3 = ret['faceEnrollmentId']
 
         #  Test Face Verification
         ret = my_voiceit.face_verification(user_id, 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationArmaan1.mp4')
-        
-        
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
+        #  Test delete enrollments
+        ret = my_voiceit.delete_face_enrollment(user_id, faceId1)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_face_enrollment(user_id, faceId2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.delete_face_enrollment(user_id, faceId3)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
+        os.remove('./faceEnrollmentArmaan1.mp4')
+        os.remove('./faceEnrollmentArmaan2.mp4')
+        os.remove('./faceEnrollmentArmaan3.mp4')
+        os.remove('./faceVerificationArmaan1.mp4')
+        my_voiceit.delete_user(user_id)
+        my_voiceit.delete_group(group_id)
 
 if __name__ == '__main__':
     unittest.main()

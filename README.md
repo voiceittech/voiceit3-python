@@ -1,6 +1,6 @@
 <img src="./python.png" width="100%" style="width:100%" />
 
-# VoiceIt2-Python
+# VoiceIt2-Python ![travisstatus](https://travis-ci.org/voiceittech/voiceit2-python.svg?branch=master)
 
 A Python wrapper for VoiceIt's API 2.0 featuring Voice + Face Verification and Identification.
 

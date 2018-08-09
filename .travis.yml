@@ -10,6 +10,7 @@ before_script:
 - sudo -H pip3 install --upgrade pip && sudo -H pip3 install --upgrade setuptools && pip3 install requests
 script: python3 tests.py
 after_success:
+  if: branch = master
 - python3 pypi.py
 notifications:
   slack:

@@ -72,9 +72,9 @@ pypipassword = os.environ['PYPIPASSWORD']
 pypistring = '''[distutils]
 index-servers = pypi
 
-'''
-#  username:''' + pypiusername + '''
-#  password:''' + pypipassword
+[pypi]
+username:''' + pypiusername + '''
+password:''' + pypipassword
 
 with open(str(os.path.expanduser("~")+"/") + "/.pypirc", "w") as pypirc:
     pypirc.write(pypistring)

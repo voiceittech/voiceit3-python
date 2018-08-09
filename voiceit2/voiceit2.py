@@ -1,7 +1,7 @@
 import requests
 
 class VoiceIt2:
-    base_URL = 'https://api.voiceit.io/'
+    base_URL = 'https://api.voiceit.io'
     voiceit_basic_auth_credentials = ''
 
     def __init__(self, key, token):
@@ -10,56 +10,56 @@ class VoiceIt2:
 
     def get_all_users(self):
         try:
-            response = requests.get(self.base_URL+'users', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/users', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
 
     def create_user(self):
         try:
-            response = requests.post(self.base_URL+'users', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.post(self.base_URL+'/users', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
 
     def check_user_exists(self, user_id):
         try:
-            response = requests.get(self.base_URL+'users/'+user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/users/'+user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def delete_user(self, user_id):
         try:
-            response = requests.delete(self.base_URL+'users/'+user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.delete(self.base_URL+'/users/'+user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def get_groups_for_user(self, user_id):
         try:
-            response = requests.get(self.base_URL+'users/'+user_id + '/groups', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/users/'+user_id + '/groups', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def get_all_groups(self):
         try:
-            response = requests.get(self.base_URL+'groups', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/groups', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def get_group(self, group_id):
         try:
-            response = requests.get(self.base_URL+'groups/' + group_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/groups/' + group_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def group_exists(self, group_id):
         try:
-            response = requests.get(self.base_URL+'groups/' + group_id + '/exists', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL+'/groups/' + group_id + '/exists', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
@@ -68,7 +68,7 @@ class VoiceIt2:
         dataObj = {}
         dataObj['description'] = group_desc
         try:
-            response = requests.post(self.base_URL + 'groups', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/groups', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
@@ -78,7 +78,7 @@ class VoiceIt2:
         dataObj['groupId'] = group_id
         dataObj['userId'] = user_id
         try:
-            response = requests.put(self.base_URL + 'groups/addUser', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
+            response = requests.put(self.base_URL + '/groups/addUser', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
@@ -88,28 +88,28 @@ class VoiceIt2:
         dataObj['groupId'] = group_id
         dataObj['userId'] = user_id
         try:
-            response = requests.put(self.base_URL + 'groups/removeUser', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
+            response = requests.put(self.base_URL + '/groups/removeUser', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def delete_group(self, group_id):
         try:
-            response = requests.delete(self.base_URL + 'groups/' + group_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.delete(self.base_URL + '/groups/' + group_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def get_all_enrollments_for_user(self, user_id):
         try:
-            response = requests.get(self.base_URL + 'enrollments/' + user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL + '/enrollments/' + user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
     def get_face_enrollments_for_user(self, user_id):
         try:
-            response = requests.get(self.base_URL + 'enrollments/face/' + user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.get(self.base_URL + '/enrollments/face/' + user_id, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()
@@ -182,21 +182,21 @@ class VoiceIt2:
 
     def delete_all_enrollments_for_user(self, user_id):
         try:
-            response = requests.delete(self.base_URL + 'enrollments/' + user_id + '/all', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.delete(self.base_URL + '/enrollments/' + user_id + '/all', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
                 return e.read()
 
     def delete_face_enrollment(self, user_id, face_enrollment_id):
         try:
-            response = requests.delete(self.base_URL + 'enrollments/face/' + user_id + '/'+ str(face_enrollment_id), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.delete(self.base_URL + '/enrollments/face/' + user_id + '/'+ str(face_enrollment_id), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
                 return e.read()
 
     def delete_enrollment_for_user(self, user_id, enrollment_id):
         try:
-            response = requests.delete(self.base_URL + 'enrollments/' + user_id + '/'+ str(enrollment_id), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.delete(self.base_URL + '/enrollments/' + user_id + '/'+ str(enrollment_id), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
@@ -233,7 +233,7 @@ class VoiceIt2:
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
-            response = requests.post(self.base_URL + 'verification/face', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/verification/face', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
             f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
@@ -248,7 +248,7 @@ class VoiceIt2:
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
-            response = requests.post(self.base_URL + 'verification/video', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/verification/video', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
             f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
@@ -274,7 +274,7 @@ class VoiceIt2:
         f = open(file_path, 'rb')
         filesObj = [('recording', ('identification.wav', f, 'audio/wav'))]
         try:
-            response = requests.post(self.base_URL + 'identification', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/identification', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
             f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
@@ -300,7 +300,7 @@ class VoiceIt2:
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
-            response = requests.post(self.base_URL + 'identification/video', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/identification/video', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
             f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:

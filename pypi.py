@@ -69,9 +69,15 @@ with open('./setup.py', 'w') as setup:
 pypiusername = os.environ['PYPIUSERNAME']
 pypipassword = os.environ['PYPIPASSWORD']
 
-pypistring = '[distutils]\nindex-servers = pypi\n\n[pypi]\nrepository = https://pypi.python.org/pypi\nusername = ' + pypiusername+ '\npassword = ' + pypipassword
+pypistring = '''[distutils]
+index-servers = pypi
 
-with open(str(os.path.expanduser('~')+'/') + '/.pypirc', "w") as pypirc:
+[pypi]
+repository = https://pypi.python.org/pypi
+username = "''' + pypiusername + '''"
+password = "''' + pypipassword + '''"'''
+
+with open(str(os.path.expanduser("~")+"/") + "/.pypirc", "w") as pypirc:
     pypirc.write(pypistring)
 
 subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])

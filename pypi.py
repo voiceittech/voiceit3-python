@@ -72,7 +72,7 @@ pypipassword = os.environ['PYPIPASSWORD']
 
 pypistring = '[distutils]\nindex-servers = pypi\n\n[pypi]\nrepository = https://pypi.python.org/pypi\nusername = ' + pypiusername+ '\npassword = ' + pypipassword
 
-with open(str(Path.home()) + '/.pypirc', "w") as pypirc:
+with open(str(os.path.expanduser('~')+'/') + '/.pypirc', "w") as pypirc:
     pypirc.write(pypistring)
 
 subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])

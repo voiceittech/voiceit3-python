@@ -283,7 +283,7 @@ class VoiceIt2:
 
     def voice_identification_by_url(self, group_id, lang, file_Url):
         dataObj = {}
-        dataObj['group_id'] = group_id
+        dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['fileUrl'] = file_Url
         try:

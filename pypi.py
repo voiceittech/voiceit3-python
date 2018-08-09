@@ -69,11 +69,9 @@ with open('./setup.py', 'w') as setup:
 pypiusername = os.environ['PYPIUSERNAME']
 pypipassword = os.environ['PYPIPASSWORD']
 
-pypistring = '''[distutils]
-index-servers = pypi
-
-[pypi]
-repository = https://pypi.python.org/pypi
+pypistring = '''[pypirc]
+servers = pypi
+[server-login]
 username = "''' + pypiusername + '''"
 password = "''' + pypipassword + '''"'''
 

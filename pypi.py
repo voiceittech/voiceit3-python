@@ -53,7 +53,7 @@ with open('./setup.py', 'w') as setup:
 
 #  Draft new release using Github REST API
 githubusername = os.environ['GITHUBUSERNAME']
-githubusername = os.environ['GITHUBPASSWORD']
+githubpassword = os.environ['GITHUBPASSWORD']
 
 release_json = {'tag_name': new_version, 'target_commitish': 'master', 'name': new_version, 'body': '', 'draft': False, 'prerelease': False}
 

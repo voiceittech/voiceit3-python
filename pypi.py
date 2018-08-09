@@ -73,7 +73,7 @@ pypistring = '''[distutils]
 index-servers = pypi
 
 [pypi]
-repository = https://pypi.org/pypi
+repository = https://pypi.org
 username = "''' + pypiusername + '''"
 password = "''' + pypipassword + '''"'''
 

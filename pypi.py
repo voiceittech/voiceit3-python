@@ -72,7 +72,7 @@ pypipassword = os.environ['PYPIPASSWORD']
 pypistring = '''[distutils]
 index-servers = pypi
 
-[pypi]'''
+'''
 #  username:''' + pypiusername + '''
 #  password:''' + pypipassword
 

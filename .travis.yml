@@ -1,0 +1,15 @@
+language: python3
+python:
+- 3.6
+script: python3 tests.py
+notifications:
+  slack:
+    rooms:
+      secure: nbiW3WzG36j3hcYLs0eclZjRKUOqMx35AKkestimvpKqKNJOHRf38CiSIIOUhkU/SVKY9uE7U/97V6Ti2Jf2tkIgILMK7E/JOCAqG1IahLGK6EJS21SssDXzbdP0r/fO7TVw22AW6tgyvf5EhKgT5iZGaxNXBBN2bdMnoolkAOczEahOBFTWE8axkPt+KxXJOZdAMlR5Ohz0LcaDQTkye0S628mUvq9JyV2G/EQ1j27c2eRyxt+Bwa7n3V4HmCQ/ljKrAAK9uJtQKvby/igw02wGc8hAGCa167gi1AmD3CZVTCffHYyBGwRAzNL5edFoYOscBqoq2MruSybYc6PKnCFP9Q4SAMsBcyU8ZwmOq6cOaX6goytmPr66XpG0IJVSuxrYpnyncG0dpabGS6lA5V9UemlwNepc6S1CWsWdYdJw4j6RrGG224QP63mAnbf19OqR7eChTl8wP6nCNA0LragkhU1WZ1ejONQUmyF+Ytf2+BYPDV4xwcuymCUX1fL3xubdXV1rd3NPTqBRUryq8W4Y1g0BVk4cxakl2zpkomeuvfTpaC6SpXvokHGEV3daEDws6P/nb/SGRZ1mVHJ4KGXvHnl7utVPpnUnEnYzIUIm8HKX/nEdV/UnjwQrnAgLqFTl5fLm5M5yzGawqJ/KxdZ1EmCJrFJQvOV/x9a90Rw=
+    on_success: always
+    on_failure: always
+  email:
+    on_success: never
+    on_failure: never
+after_success:
+- python3 pypi.py echo $(pip3 search voiceit2 | awk -F"[()]" '{print $2}')

@@ -2,7 +2,7 @@ language: python3
 python:
 - 3.6
 before_script:
-- ls /usr/bin/local/ && ls /usr/bin && pip install requests
+- ls /usr/local/bin && ls /usr/bin && pip install requests
 script: python3 tests.py
 notifications:
   slack:

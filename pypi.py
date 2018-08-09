@@ -1,35 +1,49 @@
 import sys
 import requests
+from pip._internal import commands
 
-#  grab the latest version number of voiceit2 package from pip3 (passed by command line argument) and create an array by splitting the string by '.'
-original_version = sys.argv[1]
+
+#  grab the latest version number of voiceit2 package from pip
+pkg_name = 'voiceit2'
+search_command = commands.search.SearchCommand()
+options, _ = search_command.parse_args([pkg_name])
+pypi_hits = search_command.search(pkg_name, options)
+hits = commands.search.transform_hits(pypi_hits)
+
+for hit in hits:
+    if hit['name'] == pkg_name:
+        original_version = hit['versions'][0]
+
 version_split =  original_version.split('.')
 #  Increment the minor version by 1, and reassign it to the last version array
 version_split[2] =  str(int(version_split[2]) + 1)
 #  Concatenate the array into a single string with each section separated by '.' (just like we started out with)
 new_version = '.'.join(version_split)
 
-#  Grab the string of './setup.py', replace the old version number with new version number
+setup_string = '''import setuptools
+from distutils.core import setup
 
-with open('./setup.py', 'r') as setup:
-    old_setup_string=setup.read()
-
-new_setup_string = old_setup_string.replace(original_version, new_version)
+setup(
+ name = "voiceit2",
+ version = "''' + new_version + '''",
+ description = "VoiceIt API 2.0 Python Wrapper",
+ author = "Hassan Ismaeel",
+ author_email = "hassan@voiceit.io",
+ packages=setuptools.find_packages(),
+ install_requires=[
+     "requests",
+ ],
+ url = "https://github.com/voiceittech/voiceit2-python",
+ download_url = "https://github.com/voiceittech/voiceit2-python/archive/1.0.5.tar.gz",
+ keywords = ["biometrics", "voice verification", "voice biometrics"],
+ classifiers = [
+ "Programming Language :: Python :: 3",
+ "License :: OSI Approved :: MIT License",
+ "Operating System :: OS Independent"],
+)'''
 
 with open('./setup.py', 'w') as setup:
-    setup.write(new_setup_string)
-
-"""
-#  Push changes back to github
-
-githubaccesstoken = os.environ['GITHUBACCESSTOKEN']
-
-subprocess.call(['git', 'config', '--global', 'user.email', 'andrew@voiceit.io'])
-subprocess.call(['git', 'config', '--global', 'user.email', 'voiceitbot'])
-subprocess.call(['git', 'remote', 'rm', 'origin'])
-subprocess.call(['git', 'remote', 'add', 'origin', 'https://' + githubaccesstoken + '@github.com/voiceittech/voiceit2-python.git'])
-subprocess.call(['git', 'commit', '-m', '"Update setup.py version number"'])
-subprocess.call(['git', 'push', 'origin', 'master'])
+    setup.write(setup_string)
 
 #  Draft new release using Github REST API
 githubusername = os.environ['GITHUBUSERNAME']
@@ -55,4 +69,3 @@ with open('~/.pypirc', "w") as pypirc:
     pypirc.write(pypistring)
 
 subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
-"""

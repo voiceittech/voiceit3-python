@@ -40,6 +40,10 @@ class TestVoiceIt2(unittest.TestCase):
         os.remove('./enrollmentStephen1.wav')
         os.remove('./enrollmentStephen2.wav')
         os.remove('./enrollmentStephen3.wav')
+        os.remove('./faceEnrollmentArmaan1.mp4')
+        os.remove('./faceEnrollmentArmaan2.mp4')
+        os.remove('./faceEnrollmentArmaan3.mp4')
+        os.remove('./faceVerificationArmaan1.mp4')
 
     def test_key_token(self): # Check if api key and token can be found in the environment variables
         vikey = os.environ['VIAPIKEY']
@@ -398,10 +402,6 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
-        os.remove('./faceEnrollmentArmaan1.mp4')
-        os.remove('./faceEnrollmentArmaan2.mp4')
-        os.remove('./faceEnrollmentArmaan3.mp4')
-        os.remove('./faceVerificationArmaan1.mp4')
         my_voiceit.delete_user(user_id)
         my_voiceit.delete_group(group_id)
 

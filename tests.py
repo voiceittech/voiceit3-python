@@ -59,10 +59,37 @@ class TestVoiceIt2(unittest.TestCase):
         user_id2 = ret['userId']
         ret = my_voiceit.create_user()
         user_id3 = ret['userId']
+        ret = my_voiceit.get_all_users()
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        self.assertLessEqual(0, len(ret['users']))
+        ret = my_voiceit.check_user_exists(user_id1)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.check_user_exists(user_id2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.check_user_exists(user_id3)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
         ret = my_voiceit.create_group('Sample Group Description')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         group_id = ret['groupId']
+        ret = my_voiceit.get_group(group_id)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.get_all_groups()
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        self.assertLessEqual(0, len(ret['groups']))
+        ret = my_voiceit.get_group(group_id)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        ret = my_voiceit.group_exists(group_id)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        self.assertEqual(True, ret['exists'])
         ret = my_voiceit.add_user_to_group(group_id, user_id1)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
@@ -99,6 +126,7 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.delete_user(user_id3)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+
 
     def test_video(self): # Create video enrollment, verify, identify (repeat for by URL)
         #  Create users, groups, and add users to group
@@ -156,8 +184,21 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment3)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
-        my_voiceit.delete_all_enrollments_for_user(user_id2)
+        ret = my_voiceit.delete_all_enrollments_for_user(user_id2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
 
+
+        #  Create new users and groups
+        my_voiceit.delete_group(group_id)
+        my_voiceit.delete_user(user_id1)
+        my_voiceit.delete_user(user_id2)
+        user_id1 = my_voiceit.create_user()['userId']
+        user_id2 = my_voiceit.create_user()['userId']
+        group_id = my_voiceit.create_group('Sample Group Description')['groupId']
+        my_voiceit.add_user_to_group(group_id, user_id1)
+        my_voiceit.add_user_to_group(group_id, user_id2)
+            
         #  Check video enrollments by URL
         ret = my_voiceit.create_video_enrollment_by_url(user_id1, 'en-US', 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan1.mov')
         self.assertEqual(201, ret['status'])
@@ -264,8 +305,20 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.delete_enrollment_for_user(user_id1, enrollment3)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
-        my_voiceit.delete_all_enrollments_for_user(user_id2)
+        ret = my_voiceit.delete_all_enrollments_for_user(user_id2)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
 
+
+        #  Create new users and groups
+        my_voiceit.delete_group(group_id)
+        my_voiceit.delete_user(user_id1)
+        my_voiceit.delete_user(user_id2)
+        user_id1 = my_voiceit.create_user()['userId']
+        user_id2 = my_voiceit.create_user()['userId']
+        group_id = my_voiceit.create_group('Sample Group Description')['groupId']
+        my_voiceit.add_user_to_group(group_id, user_id1)
+        my_voiceit.add_user_to_group(group_id, user_id2)
 
         #  Test Voice Enrollments by URL
         ret = my_voiceit.create_voice_enrollment_by_url(user_id1, 'en-US', 'https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan1.wav')

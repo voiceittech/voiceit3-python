@@ -6,12 +6,12 @@ addons:
       - "python3"
       - "python3-pip"
 python:
-- 3.6
+  - 3.6
 before_script:
-- sudo -H pip3 install --upgrade pip && sudo -H pip3 install --upgrade setuptools && pip3 install requests
+  - sudo -H pip3 install --upgrade pip && sudo -H pip3 install --upgrade setuptools && pip3 install requests
 script: python3 tests.py
 after_success:
-- ./after_success.sh
+  - ./after_success.sh
 notifications:
   slack:
     rooms:

@@ -5,25 +5,8 @@ import requests
 from pip._internal import commands
 import subprocess
 
-#  grab the latest version number of voiceit2 package from pip
-pkg_name = 'voiceit2'
-search_command = commands.search.SearchCommand()
-options, _ = search_command.parse_args([pkg_name])
-pypi_hits = search_command.search(pkg_name, options)
-hits = commands.search.transform_hits(pypi_hits)
-
-
-#  assign the verison number to the variable original_version
-for hit in hits:
-    if hit['name'] == pkg_name:
-        original_version = hit['versions'][0]
-
-#  convert the original_version string into an array (3 items that are separated by a '.')
-version_split =  original_version.split('.')
-#  Increment the minor version by 1, and reassign it to the last version array
-version_split[2] =  str(int(version_split[2]) + 1)
-#  Concatenate the array into a single string with each section separated by '.' (just like we started out with)
-new_version = '.'.join(version_split)
+#  Get the new version number as command line argument
+new_version = sys.argv[1]
 
 #  Produce the string to store in ./setup.py
 setup_string = '''import setuptools

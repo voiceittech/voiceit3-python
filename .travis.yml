@@ -8,9 +8,8 @@ addons:
 python:
   - 3.6
 before_script:
-  - ./before_test
   - sudo -H pip3 install --upgrade pip && sudo -H pip3 install --upgrade setuptools && pip3 install requests
-script: python3 tests.py && rm -r ./test-data
+script: python3 tests.py
 after_success:
   - ./after_success
 notifications:

@@ -1,5 +1,5 @@
 from voiceit2 import *
-import unittest,os
+import unittest,os,urllib,shutil
 
 users_to_delete = []
 groups_to_delete = []
@@ -7,7 +7,35 @@ VI_KEY = os.environ['VIAPIKEY']
 VI_TOKEN = os.environ['VIAPITOKEN']
 S3_URL = 'https://s3.amazonaws.com/voiceit-api2-testing-files/'
 
+def downloadS3File(fileName):
+    urllib.request.urlretrieve(S3_URL + fileName, fileName)
+
 class TestVoiceIt2(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        os.mkdir('test-data')
+        downloadS3File('test-data/enrollmentArmaanMyFaceAndVoice.m4a')
+        downloadS3File('test-data/enrollmentArmaan1.wav')
+        downloadS3File('test-data/enrollmentArmaan2.wav')
+        downloadS3File('test-data/enrollmentArmaan3.wav')
+        downloadS3File('test-data/verificationArmaan1.wav')
+        downloadS3File('test-data/enrollmentStephen1.wav')
+        downloadS3File('test-data/enrollmentStephen2.wav')
+        downloadS3File('test-data/enrollmentStephen3.wav')
+        downloadS3File('test-data/videoEnrollmentArmaan1.mov')
+        downloadS3File('test-data/videoEnrollmentArmaan2.mov')
+        downloadS3File('test-data/videoEnrollmentArmaan3.mov')
+        downloadS3File('test-data/videoVerificationArmaan1.mov')
+        downloadS3File('test-data/videoEnrollmentStephen1.mov')
+        downloadS3File('test-data/videoEnrollmentStephen2.mov')
+        downloadS3File('test-data/videoEnrollmentStephen3.mov')
+        downloadS3File('test-data/faceEnrollmentArmaan1.mp4')
+        downloadS3File('test-data/faceEnrollmentArmaan2.mp4')
+        downloadS3File('test-data/faceEnrollmentArmaan3.mp4')
+        downloadS3File('test-data/faceVerificationArmaan1.mp4')
+        downloadS3File('test-data/faceVerificationStephen1.mp4')
+
     # Method called once at the end of all tests
     @classmethod
     def tearDownClass(cls):
@@ -17,6 +45,7 @@ class TestVoiceIt2(unittest.TestCase):
             my_voiceit.delete_user(user_id)
         for group_id in groups_to_delete:
             my_voiceit.delete_group(group_id)
+        shutil.rmtree('test-data')
 
     # Check if api key and token can be found in the environment variables
     def test_api_key_token(self):

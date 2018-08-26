@@ -137,8 +137,10 @@ class VoiceIt2:
         filesObj = [('recording', ('enrollment.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_URL + '/enrollments/voice', auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
+            f.close()
             return response.json()
         except  requests.exceptions.HTTPError as e:
+            f.close()
             return e.read()
 
     def create_voice_enrollment_by_url(self, user_id, lang, phrase, file_Url):

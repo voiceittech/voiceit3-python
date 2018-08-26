@@ -13,7 +13,7 @@ def downloadS3File(fileName):
 class TestVoiceIt2(unittest.TestCase):
 
     @classmethod
-    def setUpClass(cls)
+    def setUpClass(cls):
         print('Started Downloading Test Files ...')
         os.mkdir('test-data')
         downloadS3File('test-data/enrollmentArmaanMyFaceAndVoice.m4a')

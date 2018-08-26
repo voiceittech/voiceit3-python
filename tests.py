@@ -13,7 +13,8 @@ def downloadS3File(fileName):
 class TestVoiceIt2(unittest.TestCase):
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls)
+        print('Started Downloading Test Files ...')
         os.mkdir('test-data')
         downloadS3File('test-data/enrollmentArmaanMyFaceAndVoice.m4a')
         downloadS3File('test-data/enrollmentArmaan1.wav')
@@ -35,6 +36,7 @@ class TestVoiceIt2(unittest.TestCase):
         downloadS3File('test-data/faceEnrollmentArmaan3.mp4')
         downloadS3File('test-data/faceVerificationArmaan1.mp4')
         downloadS3File('test-data/faceVerificationStephen1.mp4')
+        print('Done Downloading Test Files')
 
     # Method called once at the end of all tests
     @classmethod

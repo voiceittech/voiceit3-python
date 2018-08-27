@@ -228,7 +228,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertGreaterEqual(len(ret['voiceEnrollments']), 0)
 
         print('   Test Get All Video Enrollments')
-        ret = my_voiceit.get_all_voice_enrollments(user_id)
+        ret = my_voiceit.get_all_video_enrollments(user_id)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertGreaterEqual(len(ret['videoEnrollments']), 0)

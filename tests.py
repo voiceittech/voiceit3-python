@@ -225,13 +225,13 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.get_all_voice_enrollments(user_id)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
-        self.assertGreaterEqual(len(ret['enrollments']), 0)
+        self.assertGreaterEqual(len(ret['voiceEnrollments']), 0)
 
         print('   Test Get All Video Enrollments')
         ret = my_voiceit.get_all_voice_enrollments(user_id)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
-        self.assertGreaterEqual(len(ret['enrollments']), 0)
+        self.assertGreaterEqual(len(ret['videoEnrollments']), 0)
 
         print('   Test Create Voice Enrollment')
         ret = my_voiceit.create_voice_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan1.wav')

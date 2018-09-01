@@ -6,6 +6,8 @@ groups_to_delete = []
 VI_KEY = os.environ['VIAPIKEY']
 VI_TOKEN = os.environ['VIAPITOKEN']
 S3_URL = 'https://s3.amazonaws.com/voiceit-api2-testing-files/'
+PHRASE = 'never forget tomorrow is a new day'
+CONTENT_LANGUAGE = 'en-US'
 
 def downloadS3File(fileName):
     urllib.request.urlretrieve(S3_URL + fileName, fileName)
@@ -62,7 +64,7 @@ class TestVoiceIt2(unittest.TestCase):
 
         print('   Testing File Not Found Enrollment')
         try:
-            my_voiceit.create_voice_enrollment('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.wav')
+            my_voiceit.create_voice_enrollment('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
@@ -74,14 +76,14 @@ class TestVoiceIt2(unittest.TestCase):
             self.assertTrue(True)
 
         try:
-            my_voiceit.create_video_enrollment('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.mov')
+            my_voiceit.create_video_enrollment('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         print('   Testing File Not Found Verification')
         try:
-            my_voiceit.voice_verification('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.wav')
+            my_voiceit.voice_verification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
@@ -93,14 +95,14 @@ class TestVoiceIt2(unittest.TestCase):
             self.assertTrue(True)
 
         try:
-            my_voiceit.video_verification('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.mov')
+            my_voiceit.video_verification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         print('   Testing File Not Found Identification')
         try:
-            my_voiceit.voice_identification('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.wav')
+            my_voiceit.voice_identification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
@@ -112,7 +114,7 @@ class TestVoiceIt2(unittest.TestCase):
             self.assertTrue(True)
 
         try:
-            my_voiceit.video_identification('', 'en-US', 'never forget tomorrow is a new day', 'test-data/nonexistent.mov')
+            my_voiceit.video_identification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
@@ -234,7 +236,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertGreaterEqual(len(ret['videoEnrollments']), 0)
 
         print('   Test Create Voice Enrollment')
-        ret = my_voiceit.create_voice_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan1.wav')
+        ret = my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentArmaan1.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
@@ -245,7 +247,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Voice Enrollment by URL')
-        ret = my_voiceit.create_voice_enrollment_by_url(user_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/enrollmentArmaan1.wav')
+        ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentArmaan1.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -266,7 +268,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Video Enrollment')
-        ret = my_voiceit.create_video_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentArmaan1.mov')
+        ret = my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentArmaan1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
@@ -277,7 +279,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Video Enrollment by URL')
-        ret = my_voiceit.create_video_enrollment_by_url(user_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/videoEnrollmentArmaan1.mov')
+        ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentArmaan1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -306,25 +308,25 @@ class TestVoiceIt2(unittest.TestCase):
         user_id = my_voiceit.create_user()['userId']
         users_to_delete.append(user_id)
         # Create 3 voice,face and video enrollments for user
-        my_voiceit.create_voice_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan1.wav')
-        my_voiceit.create_voice_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan2.wav')
-        my_voiceit.create_voice_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan3.wav')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentArmaan1.wav')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentArmaan2.wav')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentArmaan3.wav')
         my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentArmaan1.mp4')
         my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentArmaan2.mp4')
         my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentArmaan3.mp4')
-        my_voiceit.create_video_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentArmaan1.mov')
-        my_voiceit.create_video_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentArmaan2.mov')
-        my_voiceit.create_video_enrollment(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentArmaan3.mov')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentArmaan1.mov')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentArmaan2.mov')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentArmaan3.mov')
 
         print('Test Verification API Calls')
 
         print('   Test Voice Verification')
-        ret = my_voiceit.voice_verification(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/verificationArmaan1.wav')
+        ret = my_voiceit.voice_verification(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/verificationArmaan1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Voice Verification by URL')
-        ret = my_voiceit.voice_verification_by_url(user_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/verificationArmaan1.wav')
+        ret = my_voiceit.voice_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/verificationArmaan1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -339,12 +341,12 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Video Verification')
-        ret = my_voiceit.video_verification(user_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoVerificationArmaan1.mov')
+        ret = my_voiceit.video_verification(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoVerificationArmaan1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Video Verification by URL')
-        ret = my_voiceit.video_verification_by_url(user_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/videoVerificationArmaan1.mov')
+        ret = my_voiceit.video_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoVerificationArmaan1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -363,33 +365,33 @@ class TestVoiceIt2(unittest.TestCase):
 
         # Create 3 voice enrollments for each user
         for file in ['test-data/enrollmentArmaan1.wav','test-data/enrollmentArmaan2.wav','test-data/enrollmentArmaan3.wav']:
-            my_voiceit.create_voice_enrollment(user_id_1, 'en-US', 'never forget tomorrow is a new day', file)
+            my_voiceit.create_voice_enrollment(user_id_1, CONTENT_LANGUAGE, PHRASE, file)
         for file in ['test-data/enrollmentStephen1.wav','test-data/enrollmentStephen2.wav','test-data/enrollmentStephen3.wav']:
-            my_voiceit.create_voice_enrollment(user_id_2, 'en-US', 'never forget tomorrow is a new day', file)
+            my_voiceit.create_voice_enrollment(user_id_2, CONTENT_LANGUAGE, PHRASE, file)
         # Create 3 video enrollments for each user
         for file in ['test-data/videoEnrollmentArmaan1.mov','test-data/videoEnrollmentArmaan2.mov','test-data/videoEnrollmentArmaan3.mov']:
-            my_voiceit.create_video_enrollment(user_id_1, 'en-US', 'never forget tomorrow is a new day', file)
+            my_voiceit.create_video_enrollment(user_id_1, CONTENT_LANGUAGE, PHRASE, file)
         for file in ['test-data/videoEnrollmentStephen1.mov','test-data/videoEnrollmentStephen2.mov','test-data/videoEnrollmentStephen3.mov']:
-            my_voiceit.create_video_enrollment(user_id_2, 'en-US', 'never forget tomorrow is a new day', file)
+            my_voiceit.create_video_enrollment(user_id_2, CONTENT_LANGUAGE, PHRASE, file)
 
         print('Test Identification API Calls')
 
         print('   Test Voice Identification')
-        ret = my_voiceit.voice_identification(group_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentArmaan1.wav')
+        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentArmaan1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.voice_identification(group_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/enrollmentStephen1.wav')
+        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentStephen1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Voice Identification by URL')
-        ret = my_voiceit.voice_identification_by_url(group_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/enrollmentArmaan1.wav')
+        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentArmaan1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.voice_identification_by_url(group_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/enrollmentStephen1.wav')
+        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentStephen1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
@@ -415,21 +417,21 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Video Identification')
-        ret = my_voiceit.video_identification(group_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentArmaan1.mov')
+        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentArmaan1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.video_identification(group_id, 'en-US', 'never forget tomorrow is a new day', 'test-data/videoEnrollmentStephen1.mov')
+        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentStephen1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Video Identification by URL')
-        ret = my_voiceit.video_identification_by_url(group_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/videoEnrollmentArmaan1.mov')
+        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentArmaan1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.video_identification_by_url(group_id, 'en-US', 'never forget tomorrow is a new day', S3_URL + 'test-data/videoEnrollmentStephen1.mov')
+        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentStephen1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])

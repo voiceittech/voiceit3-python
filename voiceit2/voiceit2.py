@@ -155,10 +155,9 @@ class VoiceIt2:
         except  requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_face_enrollment(self, user_id, file_path, blink_detection=False):
+    def create_face_enrollment(self, user_id, file_path):
         dataObj = {}
         dataObj['userId'] = user_id
-        dataObj['doBlinkDetection'] = blink_detection
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
@@ -169,10 +168,9 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def create_face_enrollment_by_url(self, user_id, file_Url, blink_detection=False):
+    def create_face_enrollment_by_url(self, user_id, file_Url):
         dataObj = {}
         dataObj['userId'] = user_id
-        dataObj['doBlinkDetection'] = blink_detection
         dataObj['fileUrl'] = file_Url
         try:
             response = requests.post(self.base_URL + '/enrollments/face/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
@@ -180,10 +178,9 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_video_enrollment(self, user_id, lang, phrase, file_path, blink_detection=False):
+    def create_video_enrollment(self, user_id, lang, phrase, file_path):
         dataObj = {}
         dataObj['userId'] = user_id
-        dataObj['doBlinkDetection'] = blink_detection
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
         f = open(file_path, 'rb')
@@ -196,12 +193,11 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def create_video_enrollment_by_url(self, user_id, lang, phrase, file_Url, blink_detection=False):
+    def create_video_enrollment_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        dataObj['doBlinkDetection'] = blink_detection
         dataObj['fileUrl'] = file_Url
         try:
             response = requests.post(self.base_URL + '/enrollments/video/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
@@ -285,10 +281,9 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def face_verification(self, user_id, file_path, blink_detection = False):
+    def face_verification(self, user_id, file_path):
         dataObj = {}
         dataObj['userId'] = user_id
-        dataObj['doBlinkDetection'] = blink_detection
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
@@ -299,23 +294,21 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def face_verification_by_url(self, user_id, file_Url, blink_detection = False):
+    def face_verification_by_url(self, user_id, file_Url):
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['fileUrl'] = file_Url
-        dataObj['doBlinkDetection'] = blink_detection
         try:
             response = requests.post(self.base_URL + '/verification/face/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def video_verification(self, user_id, lang, phrase, file_path, blink_detection = False):
+    def video_verification(self, user_id, lang, phrase, file_path):
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        dataObj['doBlinkDetection'] = blink_detection
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
@@ -326,13 +319,12 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def video_verification_by_url(self, user_id, lang, phrase, file_Url, blink_detection = False):
+    def video_verification_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
         dataObj['fileUrl'] = file_Url
-        dataObj['doBlinkDetection'] = blink_detection
         try:
             response = requests.post(self.base_URL + '/verification/video/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()
@@ -366,12 +358,11 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def video_identification(self, group_id, lang, phrase, file_path, blink_detection = False):
+    def video_identification(self, group_id, lang, phrase, file_path):
         dataObj = {}
         dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        dataObj['doBlinkDetection'] = blink_detection
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
@@ -382,23 +373,21 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def video_identification_by_url(self, group_id, lang, phrase, file_Url, blink_detection = False):
+    def video_identification_by_url(self, group_id, lang, phrase, file_Url):
         dataObj = {}
         dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
         dataObj['fileUrl'] = file_Url
-        dataObj['doBlinkDetection'] = blink_detection
         try:
             response = requests.post(self.base_URL + '/identification/video/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def face_identification(self, group_id, file_path, blink_detection = False):
+    def face_identification(self, group_id, file_path):
         dataObj = {}
         dataObj['groupId'] = group_id
-        dataObj['doBlinkDetection'] = blink_detection
         f = open(file_path, 'rb')
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
@@ -409,11 +398,10 @@ class VoiceIt2:
             f.close()
             return e.read()
 
-    def face_identification_by_url(self, group_id, file_Url, blink_detection = False):
+    def face_identification_by_url(self, group_id, file_Url):
         dataObj = {}
         dataObj['groupId'] = group_id
         dataObj['fileUrl'] = file_Url
-        dataObj['doBlinkDetection'] = blink_detection
         try:
             response = requests.post(self.base_URL + '/identification/face/byUrl', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()

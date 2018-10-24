@@ -21,3 +21,4 @@ Contact us with any questions at support@voiceit.io
 ## License
 
 VoiceIt2-Python is available under the MIT license. See the LICENSE file for more info.
+  

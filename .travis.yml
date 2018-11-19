@@ -12,6 +12,7 @@ before_script:
 script: python3 tests.py
 after_success:
   - ./after_success
+  - ./email.sh
 notifications:
   slack:
     rooms:

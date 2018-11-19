@@ -6,11 +6,6 @@ git checkout master
 # Save the messages into an array called message
 IFS=$'\n' message=($(git log -1 --pretty=%B | sed -e '1,2d'))
 
-echo "which sed"
-which sed
-echo "which curl"
-which curl
-
 echo $title
 for i in "${message[@]}"
 do

@@ -2,7 +2,7 @@
 
 # VoiceIt2-Python
 [![PyPI version](https://badge.fury.io/py/voiceit2.svg)](https://badge.fury.io/py/voiceit2)
-![travisstatus](https://api.travis-ci.org/voiceittech/VoiceIt2-Python.svg?branch=master)
+[![travisstatus](https://api.travis-ci.org/voiceittech/VoiceIt2-Python.svg?branch=master)](https://travis-ci.org/voiceittech/VoiceIt2-Python)
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 A Python wrapper for VoiceIt's API 2.0 featuring Voice + Face Verification and Identification.

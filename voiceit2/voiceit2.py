@@ -1,12 +1,21 @@
 import requests
+import urllib
+
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
     voiceit_basic_auth_credentials = ''
+    notificationUrl = ''
 
     def __init__(self, key, token):
         self.voiceit_basic_auth_credentials = (key, token)
         self.headers = {'platformId': '28'}
+
+    def addNotificationUrl(self, url):
+        self.notificationUrl = '?notificationURL=' + urllib.parse.quote(url, safe='')
+
+    def removeNotificationUrl(self):
+        self.notificationUrl = ''
 
     def get_all_users(self):
         try:
@@ -33,7 +42,7 @@ class VoiceIt2:
         try:
             response = requests.get(self.base_URL + '/users/' + str(user_id), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
-        except  requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError as e:
             return e.read()
 
     def delete_user(self, user_id):
@@ -75,7 +84,7 @@ class VoiceIt2:
         dataObj = {}
         dataObj['description'] = group_desc
         try:
-            response = requests.post(self.base_URL + '/groups', auth=self.voiceit_basic_auth_credentials, data = dataObj, headers=self.headers)
+            response = requests.post(self.base_URL + '/groups', auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()
         except  requests.exceptions.HTTPError as e:
             return e.read()

@@ -52,6 +52,16 @@ class TestVoiceIt2(unittest.TestCase):
         shutil.rmtree('test-data')
 
     # Check if api key and token can be found in the environment variables
+    def test_webhooks(self):
+        print('Testing Notification URL')
+        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit.addNotificationUrl('https://voiceit.io')
+        self.assertEqual(my_voiceit.notificationUrl, '?notificationURL=https%3A%2F%2Fvoiceit.io')
+        my_voiceit.removeNotificationUrl()
+        self.assertEqual(my_voiceit.notificationUrl, '')
+
+
+    # Check if api key and token can be found in the environment variables
     def test_api_key_token(self):
         print('Testing Key/Token Environment Variables')
         self.assertNotEqual(VI_KEY, '')
@@ -59,9 +69,7 @@ class TestVoiceIt2(unittest.TestCase):
 
     def test_file_not_found(self):
         my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
-
         print('Testing File Not Found')
-
         print('   Testing File Not Found Enrollment')
         try:
             my_voiceit.create_voice_enrollment('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')

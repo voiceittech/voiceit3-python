@@ -157,7 +157,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual(0, len(my_voiceit.get_groups_for_user(user_id)['groups']))
 
         print('   Testing Create User Token')
-        ret = my_voiceit.create_user_token(user_id)
+        ret = my_voiceit.create_user_token(user_id, 5)
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 

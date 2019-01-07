@@ -4,12 +4,13 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
+    version = '2.2.0'
     voiceit_basic_auth_credentials = ''
     notificationUrl = ''
 
     def __init__(self, key, token):
         self.voiceit_basic_auth_credentials = (key, token)
-        self.headers = {'platformId': '28'}
+        self.headers = {'platformId': '28', 'platformVersion': self.version}
 
     def addNotificationUrl(self, url):
         self.notificationUrl = '?notificationURL=' + urllib.parse.quote(url, safe='')
@@ -418,12 +419,8 @@ class VoiceIt2:
             return e.read()
 
     def create_user_token(self, user_id, timeout):
-        if self.notificationUrl == '':
-            url = self.base_URL + '/users/' + user_id + '/token' + '?timeOut=' + str(timeout)
-        else:
-            url = self.base_URL + '/users/' + user_id + '/token' + self.notificationUrl + '&timeOut=' + str(timeout)
         try:
-            response = requests.post(url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.post(self.base_URL + '/users/' + user_id + '/token' + '?timeOut=' + str(timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()

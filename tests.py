@@ -1,5 +1,8 @@
-from voiceit2 import *
-import unittest,os,urllib,shutil
+from voiceit2 import VoiceIt2
+import os
+import shutil
+import unittest
+import urllib
 
 users_to_delete = []
 groups_to_delete = []
@@ -13,7 +16,6 @@ def downloadS3File(fileName):
     urllib.request.urlretrieve(S3_URL + fileName, fileName)
 
 class TestVoiceIt2(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         print('Started Downloading Test Files ...')
@@ -55,6 +57,10 @@ class TestVoiceIt2(unittest.TestCase):
     def test_webhooks(self):
         print('Testing Notification URL')
         my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        if os.environ['BOXFUSE_ENV'] == 'voiceittest':
+            text_file = open(os.environ['HOME'] + '/platformVersion', "w")
+            text_file.write(my_voiceit.version)
+            text_file.close()
         my_voiceit.addNotificationUrl('https://voiceit.io')
         self.assertEqual(my_voiceit.notificationUrl, '?notificationURL=https%3A%2F%2Fvoiceit.io')
         my_voiceit.removeNotificationUrl()

@@ -18,7 +18,7 @@ then
       "username": "Release Wrapper Gate",
         "attachments": [
             {
-                "text": "Packaging '$reponame' version '$version' failed. because script could not get current version",
+                "text": "Packaging '$reponame' failed. because script could not get current version",
                 "color": "danger"
             }
         ]

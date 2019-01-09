@@ -418,9 +418,9 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_user_token(self, user_id, timeout):
+    def create_user_token(self, user_id, seconds_to_timeout):
         try:
-            response = requests.post(self.base_URL + '/users/' + user_id + '/token' + '?timeOut=' + str(timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            response = requests.post(self.base_URL + '/users/' + user_id + '/token' + '?timeOut=' + str(seconds_to_timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()

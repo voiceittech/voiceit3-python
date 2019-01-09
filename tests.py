@@ -61,10 +61,10 @@ class TestVoiceIt2(unittest.TestCase):
             text_file = open(os.environ['HOME'] + '/platformVersion', "w")
             text_file.write(my_voiceit.version)
             text_file.close()
-        my_voiceit.addNotificationUrl('https://voiceit.io')
-        self.assertEqual(my_voiceit.notificationUrl, '?notificationURL=https%3A%2F%2Fvoiceit.io')
-        my_voiceit.removeNotificationUrl()
-        self.assertEqual(my_voiceit.notificationUrl, '')
+        my_voiceit.add_notification_url('https://voiceit.io')
+        self.assertEqual(my_voiceit.notification_url, '?notificationURL=https%3A%2F%2Fvoiceit.io')
+        my_voiceit.remove_notification_url()
+        self.assertEqual(my_voiceit.notification_url, '')
 
 
     # Check if api key and token can be found in the environment variables

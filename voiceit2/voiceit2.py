@@ -4,19 +4,19 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
-    version = '2.2.0'
+    version = '2.2.1'
     voiceit_basic_auth_credentials = ''
-    notificationUrl = ''
+    notification_url = ''
 
     def __init__(self, key, token):
         self.voiceit_basic_auth_credentials = (key, token)
         self.headers = {'platformId': '28', 'platformVersion': self.version}
 
-    def addNotificationUrl(self, url):
-        self.notificationUrl = '?notificationURL=' + urllib.parse.quote(url, safe='')
+    def add_notification_url(self, url):
+        self.notification_url = '?notificationURL=' + urllib.parse.quote(url, safe='')
 
-    def removeNotificationUrl(self):
-        self.notificationUrl = ''
+    def remove_notification_url(self):
+        self.notification_url = ''
 
     def get_all_users(self):
         try:

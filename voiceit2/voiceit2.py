@@ -4,7 +4,7 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
-    version = '2.2.1'
+    version = '2.3.0'
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 
@@ -421,6 +421,13 @@ class VoiceIt2:
     def create_user_token(self, user_id, seconds_to_timeout):
         try:
             response = requests.post(self.base_URL + '/users/' + user_id + '/token' + '?timeOut=' + str(seconds_to_timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
+
+    def expire_user_tokens(self, user_id):
+        try:
+            response = requests.post(self.base_URL + '/users/' + user_id + '/expireTokens', auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()

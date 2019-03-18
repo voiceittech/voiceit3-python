@@ -167,6 +167,11 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
+        print('   Testing Expire User Tokens')
+        ret = my_voiceit.expire_user_tokens(user_id)
+        self.assertEqual(201, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
         print('   Testing Delete User')
         ret = my_voiceit.delete_user(user_id)
         self.assertEqual(200, ret['status'])
@@ -345,7 +350,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Voice Verification by URL')
-        ret = my_voiceit.voice_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/verificationA1.wav')
+        ret = my_voiceit.voice_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentA4.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -365,7 +370,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Video Verification by URL')
-        ret = my_voiceit.video_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoVerificationB1.mov')
+        ret = my_voiceit.video_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoVerificationB2.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 

@@ -1,6 +1,5 @@
 from voiceit2 import VoiceIt2
 import os
-import shutil
 import unittest
 import urllib
 
@@ -8,38 +7,37 @@ users_to_delete = []
 groups_to_delete = []
 VI_KEY = os.environ['VIAPIKEY']
 VI_TOKEN = os.environ['VIAPITOKEN']
-S3_URL = 'https://s3.amazonaws.com/voiceit-api2-testing-files/'
+VOICEIT_DRIVE_URL = 'https://drive.voiceit.io/files/'
 PHRASE = 'never forget tomorrow is a new day'
 CONTENT_LANGUAGE = 'en-US'
 
 def downloadS3File(fileName):
-    urllib.request.urlretrieve(S3_URL + fileName, fileName)
+    urllib.request.urlretrieve(VOICEIT_DRIVE_URL + fileName, fileName)
 
 class TestVoiceIt2(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print('Started Downloading Test Files ...')
-        os.mkdir('test-data')
-        downloadS3File('test-data/enrollmentBMyFaceAndVoice.m4a')
-        downloadS3File('test-data/enrollmentA1.wav')
-        downloadS3File('test-data/enrollmentA2.wav')
-        downloadS3File('test-data/enrollmentA3.wav')
-        downloadS3File('test-data/verificationA1.wav')
-        downloadS3File('test-data/enrollmentC1.wav')
-        downloadS3File('test-data/enrollmentC2.wav')
-        downloadS3File('test-data/enrollmentC3.wav')
-        downloadS3File('test-data/videoEnrollmentB1.mov')
-        downloadS3File('test-data/videoEnrollmentB2.mov')
-        downloadS3File('test-data/videoEnrollmentB3.mov')
-        downloadS3File('test-data/videoVerificationB1.mov')
-        downloadS3File('test-data/videoEnrollmentC1.mov')
-        downloadS3File('test-data/videoEnrollmentC2.mov')
-        downloadS3File('test-data/videoEnrollmentC3.mov')
-        downloadS3File('test-data/faceEnrollmentB1.mp4')
-        downloadS3File('test-data/faceEnrollmentB2.mp4')
-        downloadS3File('test-data/faceEnrollmentB3.mp4')
-        downloadS3File('test-data/faceVerificationB1.mp4')
-        downloadS3File('test-data/faceVerificationC1.mp4')
+        downloadS3File('enrollmentBMyFaceAndVoice.m4a')
+        downloadS3File('enrollmentA1.wav')
+        downloadS3File('enrollmentA2.wav')
+        downloadS3File('enrollmentA3.wav')
+        downloadS3File('verificationA1.wav')
+        downloadS3File('enrollmentC1.wav')
+        downloadS3File('enrollmentC2.wav')
+        downloadS3File('enrollmentC3.wav')
+        downloadS3File('videoEnrollmentB1.mov')
+        downloadS3File('videoEnrollmentB2.mov')
+        downloadS3File('videoEnrollmentB3.mov')
+        downloadS3File('videoVerificationB1.mov')
+        downloadS3File('videoEnrollmentC1.mov')
+        downloadS3File('videoEnrollmentC2.mov')
+        downloadS3File('videoEnrollmentC3.mov')
+        downloadS3File('faceEnrollmentB1.mp4')
+        downloadS3File('faceEnrollmentB2.mp4')
+        downloadS3File('faceEnrollmentB3.mp4')
+        downloadS3File('faceVerificationB1.mp4')
+        downloadS3File('faceVerificationC1.mp4')
         print('Done Downloading Test Files')
 
     # Method called once at the end of all tests
@@ -51,7 +49,6 @@ class TestVoiceIt2(unittest.TestCase):
             my_voiceit.delete_user(user_id)
         for group_id in groups_to_delete:
             my_voiceit.delete_group(group_id)
-        shutil.rmtree('test-data')
 
     # Check if api key and token can be found in the environment variables
     def test_webhooks(self):
@@ -78,57 +75,57 @@ class TestVoiceIt2(unittest.TestCase):
         print('Testing File Not Found')
         print('   Testing File Not Found Enrollment')
         try:
-            my_voiceit.create_voice_enrollment('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
+            my_voiceit.create_voice_enrollment('', CONTENT_LANGUAGE, PHRASE, './nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.create_face_enrollment('', 'test-data/nonexistent.mov')
+            my_voiceit.create_face_enrollment('', './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.create_video_enrollment('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
+            my_voiceit.create_video_enrollment('', CONTENT_LANGUAGE, PHRASE, './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         print('   Testing File Not Found Verification')
         try:
-            my_voiceit.voice_verification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
+            my_voiceit.voice_verification('', CONTENT_LANGUAGE, PHRASE, './nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.face_verification('', 'test-data/nonexistent.mov')
+            my_voiceit.face_verification('', './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.video_verification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
+            my_voiceit.video_verification('', CONTENT_LANGUAGE, PHRASE, './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         print('   Testing File Not Found Identification')
         try:
-            my_voiceit.voice_identification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.wav')
+            my_voiceit.voice_identification('', CONTENT_LANGUAGE, PHRASE, './nonexistent.wav')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.face_identification('', 'test-data/nonexistent.mov')
+            my_voiceit.face_identification('', './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
 
         try:
-            my_voiceit.video_identification('', CONTENT_LANGUAGE, PHRASE, 'test-data/nonexistent.mov')
+            my_voiceit.video_identification('', CONTENT_LANGUAGE, PHRASE, './nonexistent.mov')
             self.assertTrue(False)
         except IOError:
             self.assertTrue(True)
@@ -260,7 +257,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertGreaterEqual(len(ret['videoEnrollments']), 0)
 
         print('   Test Create Voice Enrollment')
-        ret = my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentA1.wav')
+        ret = my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './enrollmentA1.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
@@ -271,12 +268,12 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Voice Enrollment by URL')
-        ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentA1.wav')
+        ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA1.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Face Enrollment')
-        ret = my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentB1.mp4')
+        ret = my_voiceit.create_face_enrollment(user_id, './faceEnrollmentB1.mp4')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['faceEnrollmentId']
@@ -287,12 +284,12 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Face Enrollment by URL')
-        ret = my_voiceit.create_face_enrollment_by_url(user_id, S3_URL + 'test-data/faceEnrollmentB1.mp4')
+        ret = my_voiceit.create_face_enrollment_by_url(user_id, VOICEIT_DRIVE_URL + 'faceEnrollmentB1.mp4')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Video Enrollment')
-        ret = my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentB1.mov')
+        ret = my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
@@ -303,7 +300,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Video Enrollment by URL')
-        ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentB1.mov')
+        ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentB1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -332,45 +329,45 @@ class TestVoiceIt2(unittest.TestCase):
         user_id = my_voiceit.create_user()['userId']
         users_to_delete.append(user_id)
         # Create 3 voice,face and video enrollments for user
-        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentA1.wav')
-        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentA2.wav')
-        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentA3.wav')
-        my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentB1.mp4')
-        my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentB2.mp4')
-        my_voiceit.create_face_enrollment(user_id, 'test-data/faceEnrollmentB3.mp4')
-        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentB1.mov')
-        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentB2.mov')
-        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentB3.mov')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './enrollmentA1.wav')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './enrollmentA2.wav')
+        my_voiceit.create_voice_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './enrollmentA3.wav')
+        my_voiceit.create_face_enrollment(user_id, './faceEnrollmentB1.mp4')
+        my_voiceit.create_face_enrollment(user_id, './faceEnrollmentB2.mp4')
+        my_voiceit.create_face_enrollment(user_id, './faceEnrollmentB3.mp4')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB1.mov')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB2.mov')
+        my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB3.mov')
 
         print('Test Verification API Calls')
 
         print('   Test Voice Verification')
-        ret = my_voiceit.voice_verification(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/verificationA1.wav')
+        ret = my_voiceit.voice_verification(user_id, CONTENT_LANGUAGE, PHRASE, './verificationA1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Voice Verification by URL')
-        ret = my_voiceit.voice_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentA4.wav')
+        ret = my_voiceit.voice_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA4.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Face Verification')
-        ret = my_voiceit.face_verification(user_id, 'test-data/faceVerificationB1.mp4')
+        ret = my_voiceit.face_verification(user_id, './faceVerificationB1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Face Verification by URL')
-        ret = my_voiceit.face_verification_by_url(user_id, S3_URL + 'test-data/faceVerificationB1.mp4')
+        ret = my_voiceit.face_verification_by_url(user_id, VOICEIT_DRIVE_URL + 'faceVerificationB1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Video Verification')
-        ret = my_voiceit.video_verification(user_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoVerificationB1.mov')
+        ret = my_voiceit.video_verification(user_id, CONTENT_LANGUAGE, PHRASE, './videoVerificationB1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Video Verification by URL')
-        ret = my_voiceit.video_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoVerificationB2.mp4')
+        ret = my_voiceit.video_verification_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoVerificationB2.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
@@ -388,74 +385,74 @@ class TestVoiceIt2(unittest.TestCase):
         my_voiceit.add_user_to_group(group_id, user_id_2)
 
         # Create 3 voice enrollments for each user
-        for file in ['test-data/enrollmentA1.wav','test-data/enrollmentA2.wav','test-data/enrollmentA3.wav']:
+        for file in ['./enrollmentA1.wav','./enrollmentA2.wav','./enrollmentA3.wav']:
             my_voiceit.create_voice_enrollment(user_id_1, CONTENT_LANGUAGE, PHRASE, file)
-        for file in ['test-data/enrollmentC1.wav','test-data/enrollmentC2.wav','test-data/enrollmentC3.wav']:
+        for file in ['./enrollmentC1.wav','./enrollmentC2.wav','./enrollmentC3.wav']:
             my_voiceit.create_voice_enrollment(user_id_2, CONTENT_LANGUAGE, PHRASE, file)
         # Create 3 video enrollments for each user
-        for file in ['test-data/videoEnrollmentB1.mov','test-data/videoEnrollmentB2.mov','test-data/videoEnrollmentB3.mov']:
+        for file in ['./videoEnrollmentB1.mov','./videoEnrollmentB2.mov','./videoEnrollmentB3.mov']:
             my_voiceit.create_video_enrollment(user_id_1, CONTENT_LANGUAGE, PHRASE, file)
-        for file in ['test-data/videoEnrollmentC1.mov','test-data/videoEnrollmentC2.mov','test-data/videoEnrollmentC3.mov']:
+        for file in ['./videoEnrollmentC1.mov','./videoEnrollmentC2.mov','./videoEnrollmentC3.mov']:
             my_voiceit.create_video_enrollment(user_id_2, CONTENT_LANGUAGE, PHRASE, file)
 
         print('Test Identification API Calls')
 
         print('   Test Voice Identification')
-        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentA1.wav')
+        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, './enrollmentA1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/enrollmentC1.wav')
+        ret = my_voiceit.voice_identification(group_id, CONTENT_LANGUAGE, PHRASE, './enrollmentC1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Voice Identification by URL')
-        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentA1.wav')
+        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/enrollmentC1.wav')
+        ret = my_voiceit.voice_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentC1.wav')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Face Identification')
-        ret = my_voiceit.face_identification(group_id, 'test-data/faceVerificationB1.mp4')
+        ret = my_voiceit.face_identification(group_id, './faceVerificationB1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.face_identification(group_id, 'test-data/faceVerificationC1.mp4')
+        ret = my_voiceit.face_identification(group_id, './faceVerificationC1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Face Identification by URL')
-        ret = my_voiceit.face_identification_by_url(group_id, S3_URL + 'test-data/faceVerificationB1.mp4')
+        ret = my_voiceit.face_identification_by_url(group_id, VOICEIT_DRIVE_URL + 'faceVerificationB1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.face_identification_by_url(group_id, S3_URL + 'test-data/faceVerificationC1.mp4')
+        ret = my_voiceit.face_identification_by_url(group_id, VOICEIT_DRIVE_URL + 'faceVerificationC1.mp4')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Video Identification')
-        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentB1.mov')
+        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, 'test-data/videoEnrollmentC1.mov')
+        ret = my_voiceit.video_identification(group_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentC1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])
 
         print('   Test Video Identification by URL')
-        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentB1.mov')
+        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentB1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_1, ret['userId'])
-        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, S3_URL + 'test-data/videoEnrollmentC1.mov')
+        ret = my_voiceit.video_identification_by_url(group_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentC1.mov')
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         self.assertEqual(user_id_2, ret['userId'])

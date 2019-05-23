@@ -4,7 +4,7 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
-    version = '2.3.0'
+    version = '2.4.0'
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 
@@ -218,48 +218,6 @@ class VoiceIt2:
     def delete_all_enrollments(self, user_id):
         try:
             response = requests.delete(self.base_URL + '/enrollments/' + str(user_id) + '/all' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_all_face_enrollments(self, user_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/' + str(user_id) + '/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_all_voice_enrollments(self, user_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/' + str(user_id) + '/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_all_video_enrollments(self, user_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/' + str(user_id) + '/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_face_enrollment(self, user_id, face_enrollment_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/face/' + str(user_id) + '/' + str(face_enrollment_id) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_voice_enrollment(self, user_id, voice_enrollment_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/voice/' + str(user_id) + '/' + str(voice_enrollment_id) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-                return e.read()
-
-    def delete_video_enrollment(self, user_id, video_enrollment_id):
-        try:
-            response = requests.delete(self.base_URL + '/enrollments/video/' + str(user_id) + '/' + str(video_enrollment_id) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
                 return e.read()

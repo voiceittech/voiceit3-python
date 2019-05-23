@@ -262,11 +262,6 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
 
-        print('   Test Delete Voice Enrollment')
-        ret = my_voiceit.delete_voice_enrollment(user_id, enrollment_id_to_delete)
-        self.assertEqual(200, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
-
         print('   Test Create Voice Enrollment by URL')
         ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA1.wav')
         self.assertEqual(201, ret['status'])
@@ -277,11 +272,6 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['faceEnrollmentId']
-
-        print('   Test Delete Face Enrollment')
-        ret = my_voiceit.delete_face_enrollment(user_id, enrollment_id_to_delete)
-        self.assertEqual(200, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Face Enrollment by URL')
         ret = my_voiceit.create_face_enrollment_by_url(user_id, VOICEIT_DRIVE_URL + 'faceEnrollmentB1.mp4')
@@ -294,29 +284,9 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
 
-        print('   Test Delete Video Enrollment')
-        ret = my_voiceit.delete_video_enrollment(user_id, enrollment_id_to_delete)
-        self.assertEqual(200, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
-
         print('   Test Create Video Enrollment by URL')
         ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentB1.mov')
         self.assertEqual(201, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
-
-        print('   Test Delete All Video Enrollments')
-        ret = my_voiceit.delete_all_video_enrollments(user_id)
-        self.assertEqual(200, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
-
-        print('   Test Delete All Voice Enrollments')
-        ret = my_voiceit.delete_all_voice_enrollments(user_id)
-        self.assertEqual(200, ret['status'])
-        self.assertEqual('SUCC', ret['responseCode'])
-
-        print('   Test Delete All Face Enrollments')
-        ret = my_voiceit.delete_all_face_enrollments(user_id)
-        self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Delete All Enrollments')

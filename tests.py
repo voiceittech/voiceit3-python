@@ -38,6 +38,12 @@ class TestVoiceIt2(unittest.TestCase):
         downloadS3File('faceEnrollmentB3.mp4')
         downloadS3File('faceVerificationB1.mp4')
         downloadS3File('faceVerificationC1.mp4')
+        downloadS3File('faceEnrollmentA1.mov')
+        downloadS3File('faceEnrollmentA2.mov')
+        downloadS3File('faceEnrollmentA3.mov')
+        downloadS3File('videoEnrollmentA1.mov')
+        downloadS3File('videoEnrollmentA2.mov')
+        downloadS3File('videoEnrollmentA3.mov')
         print('Done Downloading Test Files')
 
     # Method called once at the end of all tests
@@ -263,29 +269,29 @@ class TestVoiceIt2(unittest.TestCase):
         enrollment_id_to_delete = ret['id']
 
         print('   Test Create Voice Enrollment by URL')
-        ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA1.wav')
+        ret = my_voiceit.create_voice_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'enrollmentA2.wav')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Face Enrollment')
-        ret = my_voiceit.create_face_enrollment(user_id, './faceEnrollmentB1.mp4')
+        ret = my_voiceit.create_face_enrollment(user_id, './faceEnrollmentA1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['faceEnrollmentId']
 
         print('   Test Create Face Enrollment by URL')
-        ret = my_voiceit.create_face_enrollment_by_url(user_id, VOICEIT_DRIVE_URL + 'faceEnrollmentB1.mp4')
+        ret = my_voiceit.create_face_enrollment_by_url(user_id, VOICEIT_DRIVE_URL + 'faceEnrollmentA2.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 
         print('   Test Create Video Enrollment')
-        ret = my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentB1.mov')
+        ret = my_voiceit.create_video_enrollment(user_id, CONTENT_LANGUAGE, PHRASE, './videoEnrollmentA1.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
         enrollment_id_to_delete = ret['id']
 
         print('   Test Create Video Enrollment by URL')
-        ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentB1.mov')
+        ret = my_voiceit.create_video_enrollment_by_url(user_id, CONTENT_LANGUAGE, PHRASE, VOICEIT_DRIVE_URL + 'videoEnrollmentA2.mov')
         self.assertEqual(201, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
 

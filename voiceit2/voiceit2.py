@@ -138,12 +138,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_voice_enrollment(self, user_id, lang, phrase, file_path):
+    def create_voice_enrollment(self, user_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('recording', ('enrollment.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_URL + '/enrollments/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -165,10 +170,15 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_face_enrollment(self, user_id, file_path):
+    def create_face_enrollment(self, user_id, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/enrollments/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -188,12 +198,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def create_video_enrollment(self, user_id, lang, phrase, file_path):
+    def create_video_enrollment(self, user_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/enrollments/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -222,12 +237,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
                 return e.read()
 
-    def voice_verification(self, user_id, lang, phrase, file_path):
+    def voice_verification(self, user_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('recording', ('verification.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_URL + '/verification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -249,10 +269,15 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def face_verification(self, user_id, file_path):
+    def face_verification(self, user_id, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/verification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -272,12 +297,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def video_verification(self, user_id, lang, phrase, file_path):
+    def video_verification(self, user_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['userId'] = user_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/verification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -299,12 +329,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def voice_identification(self, group_id, lang, phrase, file_path):
+    def voice_identification(self, group_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('recording', ('identification.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_URL + '/identification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -326,12 +361,17 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def video_identification(self, group_id, lang, phrase, file_path):
+    def video_identification(self, group_id, lang, phrase, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['groupId'] = group_id
         dataObj['contentLanguage'] = lang
         dataObj['phrase'] = phrase
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/identification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)
@@ -353,10 +393,15 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
 
-    def face_identification(self, group_id, file_path):
+    def face_identification(self, group_id, file_path=None, file_buffer=None):
+        if not file_path and not file_buffer:
+            raise Exception("file_path or file_buffer needs to be specified")
         dataObj = {}
         dataObj['groupId'] = group_id
-        f = open(file_path, 'rb')
+        if file_path:
+            f = open(file_path, 'rb')
+        if file_buffer:
+            f = file_buffer
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_URL + '/identification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers)

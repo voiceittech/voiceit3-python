@@ -4,7 +4,7 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
-    version = '2.4.1'
+    version = '2.4.2'
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 

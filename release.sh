@@ -80,18 +80,6 @@ then
       exit 1
     fi
 
-    curl -X POST -H 'Content-type: application/json' --data '{
-      "icon_url": "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/TravisCI-Mascot-1.png",
-      "username": "Release Wrapper Gate",
-        "attachments": [
-            {
-                "text": "Packaging '$reponame' version '$version' succeeded.",
-                "color": "good"
-            }
-        ]
-    }' 'https://hooks.slack.com/services/'$SLACKPARAM1'/'$SLACKPARAM2'/'$SLACKPARAM3
-
-
     # Just the git commit message title
     title=$(git log -1 --pretty=%B | head -n 1)
     git checkout master

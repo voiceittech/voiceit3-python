@@ -3,8 +3,8 @@ import urllib
 
 
 class VoiceIt2:
-    base_URL = 'https://api.voiceit.io'
-    version = '2.4.2'
+    base_URL = 'htps://api.voiceit.io'
+    version = '2.5.0'
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 
@@ -38,7 +38,48 @@ class VoiceIt2:
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()
+    
+    def create_unmanaged_sub_account(self, firstName, lastName, email, password, lang):
+        dataObj = {}
+        dataObj['firstName'] = firstName
+        dataObj['contentLanguage'] = lang
+        dataObj['lastName'] = lastName
+        dataObj['email'] = email
+        dataObj['password'] = password
+        try:
+            response = requests.post(self.base_URL + '/subaccount/unmanaged' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
+    
+    def create_managed_sub_account(self, firstName, lastName, email, password, lang):
+        dataObj = {}
+        dataObj['firstName'] = firstName
+        dataObj['contentLanguage'] = lang
+        dataObj['lastName'] = lastName
+        dataObj['email'] = email
+        dataObj['password'] = password
+        try:
+            response = requests.post(self.base_URL + '/subaccount/managed' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
+    
 
+    def regenerate_sub_account_api_token(self, sub_account_api_key):
+        try:
+            response = requests.post(self.base_URL + '/subaccount/' + str(sub_account_api_key) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
+
+    def delete_sub_account(self, sub_account_api_key):
+        try:
+            response = requests.delete(self.base_URL + '/subaccount/' + str(sub_account_api_key) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
+    
     def check_user_exists(self, user_id):
         try:
             response = requests.get(self.base_URL + '/users/' + str(user_id) + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)

@@ -185,6 +185,34 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.delete_user(user_id)
         self.assertEqual(200, ret['status'])
         self.assertEqual('SUCC', ret['responseCode'])
+    
+    def test_sub_accounts(self):
+        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        print('Testing Sub Account API Calls')
+
+        print('   Testing Create Unmanaged Sub Account')
+        ret = my_voiceit.create_unmanaged_sub_account("Test", "Python", "", "", "")
+        self.assertEqual(201, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        unmanaged_sub_account = ret['apiKey']
+
+        print('   Testing Create Managed Sub Account')
+        ret = my_voiceit.create_managed_sub_account("Test", "Python", "", "", "")
+        self.assertEqual(201, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+        managed_sub_account = ret['apiKey']
+
+        print('   Testing Regenerate Sub Account API Token')
+        ret = my_voiceit.regenerate_sub_account_api_token(unmanaged_sub_account)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
+        print('   Testing Delete Sub Account')
+        ret = my_voiceit.delete_sub_account(unmanaged_sub_account)
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
+        ret = my_voiceit.delete_sub_account(managed_sub_account)
 
     def test_phrases(self):
         my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)

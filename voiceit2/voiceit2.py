@@ -4,7 +4,7 @@ import urllib
 
 class VoiceIt2:
     base_URL = 'https://api.voiceit.io'
-    version = '2.5.0'
+    version = '2.6.0'
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 
@@ -65,6 +65,12 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
     
+    def switch_sub_account_type(self, subAccountAPIKey):
+        try:
+            response = requests.post(self.base_URL + '/subaccount/' + subAccountAPIKey + '/switchType' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return e.read()
 
     def regenerate_sub_account_api_token(self, sub_account_api_key):
         try:

@@ -228,6 +228,10 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
         unmanaged_sub_account = ret['apiKey']
 
+        ret = my_voiceit.switch_sub_account_type(ret['apiKey'])
+        self.assertEqual(200, ret['status'])
+        self.assertEqual('SUCC', ret['responseCode'])
+
         print('   Testing Create Managed Sub Account')
         ret = my_voiceit.create_managed_sub_account("Test", "Python", "", "", "")
         self.assertEqual(201, ret['status'])

@@ -1,6 +1,6 @@
 #!/bin/bash
 commit=$(git log -1 --pretty=%B | head -n 1)
-version=$(echo $(pip3 search voiceit2 | awk -F"[()]" '{print $2}') | tr "." "\n")
+version=$(echo $(pip_search voiceit2 | awk -F"[()]" '{print $2}') | tr "." "\n")
 set -- $version
 major=$1
 minor=$2

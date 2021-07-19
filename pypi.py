@@ -21,8 +21,8 @@ setup(
  install_requires=[
      "requests",
  ],
- url = "https://github.com/voiceittech/voiceit2-python",
- download_url = "https://github.com/voiceittech/voiceit2-python/archive/''' + new_version + '''.tar.gz",
+ url = "https://github.com/voiceittech/VoiceIt2-Python",
+ download_url = "https://github.com/voiceittech/VoiceIt2-Python/archive/''' + new_version + '''.tar.gz",
  keywords = ["biometrics", "voice verification", "voice biometrics"],
  classifiers = [
  "Programming Language :: Python :: 3",
@@ -40,7 +40,7 @@ gh_token = os.environ['GH_TOKEN']
 release_json = {'tag_name': new_version, 'target_commitish': 'master', 'name': new_version, 'body': '', 'draft': False, 'prerelease': False}
 
 try:
-    response = requests.post('https://api.github.com/repos/voiceittech/voiceit2-python/releases', headers={'Authorization': 'token ' + gh_token}, data=json.dumps(release_json))
+    response = requests.post('https://api.github.com/repos/voiceittech/VoiceIt2-Python/releases', headers={'Authorization': 'token ' + gh_token}, data=json.dumps(release_json))
     print(response.text)
 except  requests.exceptions.HTTPError as e:
     print(e.read())

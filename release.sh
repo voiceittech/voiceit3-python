@@ -59,6 +59,10 @@ then
     exit 1
   fi
 
+  echo 'wrapperplatformversion='$wrapperplatformversion
+  echo 'new major='$major
+  echo 'new minor='$minor
+  echo 'new patch='$patch
   echo 'new version='$major'.'$minor'.'$patch
   version=$major'.'$minor'.'$patch
   if [[ $wrapperplatformversion = $version ]];

@@ -11,7 +11,7 @@ before_script:
   - pip3 install --upgrade pip && pip3 install --upgrade setuptools && pip3 install requests
 script: python3 tests.py
 after_success:
-  - pip3 install pip-search && ./release.sh
+  - pip3 install pip-search twine && ./release.sh
 notifications:
   slack:
     rooms:

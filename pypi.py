@@ -60,4 +60,6 @@ password:''' + pypipassword
 with open(str(os.path.expanduser("~")+"/") + "/.pypirc", "w") as pypirc:
     pypirc.write(pypistring)
 
-subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
+#  subprocess.call(['python3', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
+subprocess.call(['python3', 'setup.py', 'sdist', 'bdist_wheel'])
+subprocess.call(['twine', 'upload', '-r', 'pypi', 'dist/*'])

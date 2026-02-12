@@ -2,7 +2,7 @@ import requests
 import urllib
 
 
-class VoiceIt2:
+class VoiceIt3:
     base_url = ''
     version = '2.7.0'
     voiceit_basic_auth_credentials = ''

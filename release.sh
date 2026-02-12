@@ -1,6 +1,6 @@
 #!/bin/bash
 commit=$(git log -1 --pretty=%B | head -n 1)
-version=$(echo $(pip_search voiceit2 | awk 'NR==6 {print $5}') | tr "." "\n")
+version=$(echo $(pip_search voiceit3 | awk 'NR==6 {print $5}') | tr "." "\n")
 set -- $version
 major=$1
 minor=$2
@@ -94,7 +94,7 @@ then
         formattedmessages=$formattedmessages'|'$i
       done
 
-      curl -X POST -H "X-Admin-Password: $EMAILAUTHPASS" --data-urlencode "messages=$formattedmessages" -d "packageManaged=true" --data-urlencode "instructions=pip3 install --upgrade voiceit2</code></div><br />" "https://api.voiceit.io/platform/28"
+      curl -X POST -H "X-Admin-Password: $EMAILAUTHPASS" --data-urlencode "messages=$formattedmessages" -d "packageManaged=true" --data-urlencode "instructions=pip3 install --upgrade voiceit3</code></div><br />" "https://api.voiceit.io/platform/28"
     fi
     exit 0
 

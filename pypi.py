@@ -12,7 +12,7 @@ setup_string = '''import setuptools
 from distutils.core import setup
 
 setup(
- name = "voiceit2",
+ name = "voiceit3",
  version = "''' + new_version + '''",
  description = "VoiceIt API 3.0 Python Wrapper",
  author = "Hassan Ismaeel",

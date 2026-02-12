@@ -1,4 +1,4 @@
-from voiceit2 import VoiceIt2
+from voiceit3 import VoiceIt3
 import os
 import unittest
 import urllib
@@ -14,7 +14,7 @@ CONTENT_LANGUAGE = 'en-US'
 def downloadVoiceItDriveFile(fileName):
     urllib.request.urlretrieve(VOICEIT_DRIVE_URL + fileName, fileName)
 
-class TestVoiceIt2(unittest.TestCase):
+class TestVoiceIt3(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print('Started Downloading Test Files ...')
@@ -56,7 +56,7 @@ class TestVoiceIt2(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         global groups_to_delete,users_to_delete
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         for user_id in users_to_delete:
             my_voiceit.delete_user(user_id)
         for group_id in groups_to_delete:
@@ -97,7 +97,7 @@ class TestVoiceIt2(unittest.TestCase):
     # Check if api key and token can be found in the environment variables
     def test_webhooks(self):
         print('Testing Notification URL')
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         if os.environ['BOXFUSE_ENV'] == 'voiceittest':
             text_file = open(os.environ['HOME'] + '/platformVersion', "w")
             text_file.write(my_voiceit.version)
@@ -115,7 +115,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertNotEqual(VI_TOKEN, '')
 
     def test_file_not_found(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         print('Testing File Not Found')
         print('   Testing File Not Found Enrollment')
         try:
@@ -175,7 +175,7 @@ class TestVoiceIt2(unittest.TestCase):
             self.assertTrue(True)
 
     def test_users(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         global users_to_delete
         print('Testing User API Calls')
 
@@ -219,7 +219,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
     
     def test_sub_accounts(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         print('Testing Sub Account API Calls')
 
         print('   Testing Create Unmanaged Sub Account')
@@ -247,7 +247,7 @@ class TestVoiceIt2(unittest.TestCase):
         ret = my_voiceit.delete_sub_account(managed_sub_account)
 
     def test_phrases(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         print('Testing Phrase API Calls')
 
         print('   Testing Get Phrases')
@@ -257,7 +257,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertGreaterEqual(len(ret['phrases']), 0)
 
     def test_groups(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         global groups_to_delete,users_to_delete
         print('Test Group API Calls')
 
@@ -304,7 +304,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
     def test_enrollments(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         ret = my_voiceit.create_user()
         user_id = my_voiceit.create_user()['userId']
         users_to_delete.append(user_id)
@@ -367,7 +367,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
     def test_verification(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         user_id = my_voiceit.create_user()['userId']
         users_to_delete.append(user_id)
         # Create 3 voice,face and video enrollments for user
@@ -414,7 +414,7 @@ class TestVoiceIt2(unittest.TestCase):
         self.assertEqual('SUCC', ret['responseCode'])
 
     def test_identification(self):
-        my_voiceit = VoiceIt2(VI_KEY, VI_TOKEN)
+        my_voiceit = VoiceIt3(VI_KEY, VI_TOKEN)
         global groups_to_delete,users_to_delete
         print('Start Identification Setup...')
         user_id_1 = my_voiceit.create_user()['userId']

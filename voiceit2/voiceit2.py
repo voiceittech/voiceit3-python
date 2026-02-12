@@ -66,12 +66,6 @@ class VoiceIt2:
         except requests.exceptions.HTTPError as e:
             return e.read()
     
-    def switch_sub_account_type(self, subAccountAPIKey):
-        try:
-            response = requests.post(self.base_url + '/subaccount/' + subAccountAPIKey + '/switchType' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers)
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-            return e.read()
 
     def regenerate_sub_account_api_token(self, sub_account_api_key):
         try:

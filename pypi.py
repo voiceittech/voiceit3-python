@@ -14,7 +14,7 @@ from distutils.core import setup
 setup(
  name = "voiceit2",
  version = "''' + new_version + '''",
- description = "VoiceIt API 2.0 Python Wrapper",
+ description = "VoiceIt API 3.0 Python Wrapper",
  author = "Hassan Ismaeel",
  author_email = "hassan@voiceit.io",
  packages=setuptools.find_packages(),

@@ -8,7 +8,7 @@ class VoiceIt3:
     voiceit_basic_auth_credentials = ''
     notification_url = ''
 
-    def __init__(self, key, token, custom_url = 'https://qpi.voiceit.io'):
+    def __init__(self, key, token, custom_url = 'https://api.voiceit.io'):
         self.voiceit_basic_auth_credentials = (key, token)
         self.headers = {'platformId': '28', 'platformVersion': self.version}
         self.base_url = custom_url

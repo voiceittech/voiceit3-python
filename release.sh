@@ -94,7 +94,7 @@ then
         formattedmessages=$formattedmessages'|'$i
       done
 
-      curl -X POST -H "X-Admin-Password: $EMAILAUTHPASS" --data-urlencode "messages=$formattedmessages" -d "packageManaged=true" --data-urlencode "instructions=pip3 install --upgrade voiceit3</code></div><br />" "https://qpi.voiceit.io/platform/28"
+      curl -X POST -H "X-Admin-Password: $EMAILAUTHPASS" --data-urlencode "messages=$formattedmessages" -d "packageManaged=true" --data-urlencode "instructions=pip3 install --upgrade voiceit3</code></div><br />" "https://api.voiceit.io/platform/28"
     fi
     exit 0
 

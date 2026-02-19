@@ -1,6 +1,6 @@
 <img src="./python.png" width="100%" style="width:100%" />
 
-# VoiceIt3-Python [![travisstatus](https://app.travis-ci.com/voiceittech/VoiceIt3-Python.svg?branch=master)](https://app.travis-ci.com/github/voiceittech/VoiceIt3-Python) [![version](https://img.shields.io/pypi/dm/voiceit3)](https://pypi.org/project/voiceit3/) [![downloads](https://img.shields.io/pypi/dm/voiceit3)](https://pypi.org/project/voiceit3/) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
+# VoiceIt3-Python [![CI](https://github.com/voiceittech/VoiceIt3-Python/actions/workflows/ci.yml/badge.svg)](https://github.com/voiceittech/VoiceIt3-Python/actions/workflows/ci.yml) [![version](https://img.shields.io/pypi/dm/voiceit3)](https://pypi.org/project/voiceit3/) [![downloads](https://img.shields.io/pypi/dm/voiceit3)](https://pypi.org/project/voiceit3/) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 A Python wrapper for VoiceIt's API 3.0 featuring Voice + Face Verification and Identification.
 

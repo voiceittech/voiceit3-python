@@ -16,7 +16,7 @@ setup(
  version = "''' + new_version + '''",
  description = "VoiceIt API 3.0 Python Wrapper",
  author = "Hassan Ismaeel",
- author_email = "hassan@voiceit.io",
+ author_email = "support@voiceit.tech",
  packages=setuptools.find_packages(),
  install_requires=[
      "requests",

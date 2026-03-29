@@ -3,9 +3,20 @@
 
 A Python wrapper for VoiceIt's API 3.0 featuring Voice + Face Verification and Identification.
 
+## Installation
+
+```bash
+git clone https://github.com/voiceittech/VoiceIt3-Python.git
+```
+
+Then import in your project:
+```python
+from voiceit3 import VoiceIt3
+```
+
 ## Getting Started
 
-Sign up for a free Developer Account at [VoiceIt.io](https://voiceit.io/signup). Visit the settings tab to view your API Key and Token. 
+Sign up for a free Developer Account at [VoiceIt.io](https://voiceit.io/pricing). Visit the settings tab to view your API Key and Token. 
 
 ## API calls
 You can visit our [HTTP API 3.0 Documentation](https://api.voiceit.io/?python#introduction) for detailed information on each API call.

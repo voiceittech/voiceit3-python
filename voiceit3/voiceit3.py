@@ -147,7 +147,7 @@ class VoiceIt3:
         dataObj['groupId'] = group_id
         dataObj['userId'] = user_id
         try:
-            response = requests.put(self.base_url + '/groups/removeUser' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
+            response = requests.delete(self.base_url + '/groups/removeUser' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers)
             return response.json()
         except requests.exceptions.HTTPError as e:
             return e.read()

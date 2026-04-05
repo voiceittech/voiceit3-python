@@ -1,5 +1,6 @@
 <img src="./python.png" width="100%" style="width:100%" />
 
+[![API Test](https://github.com/voiceittech/VoiceIt3-Python/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/VoiceIt3-Python/actions/workflows/test.yml)
 [![Version](https://img.shields.io/badge/version-2.7.0-blue)](https://github.com/voiceittech/VoiceIt3-Python)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/voiceittech/VoiceIt3-Python/blob/main/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Python-lightgrey)](https://github.com/voiceittech/VoiceIt3-Python)

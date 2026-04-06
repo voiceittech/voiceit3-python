@@ -1,28 +1,42 @@
 #!/usr/bin/env python3
-"""Test script for VoiceIt3 Python SDK — exercises all API endpoints against voiceitapi3"""
-
-import os
-import sys
+"""Full API test: create user, video enroll x3, video verify, cleanup"""
+import os, sys
 from voiceit3 import VoiceIt3
 
 api_key = os.environ.get("VOICEIT_API_KEY", "")
 api_token = os.environ.get("VOICEIT_API_TOKEN", "")
-
 if not api_key or not api_token:
-    print("Set VOICEIT_API_KEY and VOICEIT_API_TOKEN environment variables")
-    sys.exit(1)
+    print("Set VOICEIT_API_KEY and VOICEIT_API_TOKEN"); sys.exit(1)
 
 vi = VoiceIt3(api_key, api_token)
+phrase = "never forget tomorrow is a new day"
+td = "test-data"
+errors = 0
 
-# Users
-print("CreateUser:", vi.create_user())
-print("GetAllUsers:", vi.get_all_users())
+def check(step, r, expected="SUCC"):
+    global errors
+    code = r.get("responseCode", "?")
+    ok = code == expected
+    print(f"{'PASS' if ok else 'FAIL'}: {step} ({code})")
+    if not ok: errors += 1
+    return r
 
-# Groups
-print("CreateGroup:", vi.create_group("Test Group"))
-print("GetAllGroups:", vi.get_all_groups())
+# 1. Create user
+r = check("CreateUser", vi.create_user())
+user_id = r.get("userId", "")
 
-# Phrases
-print("GetPhrases:", vi.get_phrases("en-US"))
+# 2. Video enrollment x3
+for i in range(1, 4):
+    check(f"VideoEnrollment{i}", vi.create_video_enrollment(user_id, "en-US", phrase, f"{td}/videoEnrollmentA{i}.mov"))
 
-print("\nAll API calls completed successfully!")
+# 3. Video verification (tests both voice + face)
+r = check("VideoVerification", vi.video_verification(user_id, "en-US", phrase, f"{td}/videoVerificationA1.mov"))
+print(f"  Voice confidence: {r.get('voiceConfidence', 0)}, Face confidence: {r.get('faceConfidence', 0)}")
+
+# 4. Cleanup
+check("DeleteEnrollments", vi.delete_all_enrollments(user_id))
+check("DeleteUser", vi.delete_user(user_id))
+
+if errors > 0:
+    print(f"\n{errors} FAILURES"); sys.exit(1)
+print("\nAll tests passed!")

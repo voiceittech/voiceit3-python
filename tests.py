@@ -8,7 +8,7 @@ groups_to_delete = []
 VI_KEY = os.environ['VIAPIKEY']
 VI_TOKEN = os.environ['VIAPITOKEN']
 VOICEIT_DRIVE_URL = 'https://drive.voiceit.io/files/'
-PHRASE = 'never forget tomorrow is a new day'
+PHRASE = 'Never forget tomorrow is a new day'
 CONTENT_LANGUAGE = 'en-US'
 
 def downloadVoiceItDriveFile(fileName):

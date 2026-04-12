@@ -9,7 +9,7 @@ if not api_key or not api_token:
     print("Set VOICEIT_API_KEY and VOICEIT_API_TOKEN"); sys.exit(1)
 
 vi = VoiceIt3(api_key, api_token)
-phrase = "never forget tomorrow is a new day"
+phrase = "Never forget tomorrow is a new day"
 td = "test-data"
 errors = 0
 

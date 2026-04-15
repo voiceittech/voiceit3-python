@@ -197,13 +197,12 @@ class VoiceIt3:
         filesObj = [('recording', ('enrollment.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_url + '/enrollments/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def create_voice_enrollment_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
@@ -231,13 +230,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/enrollments/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def create_face_enrollment_by_url(self, user_id, file_Url):
         dataObj = {}
@@ -265,13 +263,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/enrollments/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def create_video_enrollment_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
@@ -308,13 +305,12 @@ class VoiceIt3:
         filesObj = [('recording', ('verification.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_url + '/verification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def voice_verification_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
@@ -342,13 +338,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/verification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def face_verification_by_url(self, user_id, file_Url):
         dataObj = {}
@@ -376,13 +371,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/verification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def video_verification_by_url(self, user_id, lang, phrase, file_Url):
         dataObj = {}
@@ -412,13 +406,12 @@ class VoiceIt3:
         filesObj = [('recording', ('identification.wav', f, 'audio/wav'))]
         try:
             response = requests.post(self.base_url + '/identification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def voice_identification_by_url(self, group_id, lang, phrase, file_Url):
         dataObj = {}
@@ -448,13 +441,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/identification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def video_identification_by_url(self, group_id, lang, phrase, file_Url):
         dataObj = {}
@@ -482,13 +474,12 @@ class VoiceIt3:
         filesObj = [('video', ('video.mp4', f, 'video/mp4'))]
         try:
             response = requests.post(self.base_url + '/identification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
-            if owned:
-                f.close()
             return response.json()
         except requests.exceptions.HTTPError as e:
+            return e.read()
+        finally:
             if owned:
                 f.close()
-            return e.read()
 
     def face_identification_by_url(self, group_id, file_Url):
         dataObj = {}

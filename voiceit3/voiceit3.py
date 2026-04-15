@@ -25,21 +25,21 @@ class VoiceIt3:
             response = requests.get(self.base_url + '/users' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_phrases(self, lang):
         try:
             response = requests.get(self.base_url + '/phrases/' + urllib.parse.quote(str(lang), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_user(self):
         try:
             response = requests.post(self.base_url + '/users' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
     
     def create_unmanaged_sub_account(self, firstName, lastName, email, password, lang):
         dataObj = {}
@@ -52,7 +52,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/subaccount/unmanaged' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
     
     def create_managed_sub_account(self, firstName, lastName, email, password, lang):
         dataObj = {}
@@ -65,7 +65,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/subaccount/managed' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
     
 
     def regenerate_sub_account_api_token(self, sub_account_api_key):
@@ -73,56 +73,56 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/subaccount/' + urllib.parse.quote(str(sub_account_api_key), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def delete_sub_account(self, sub_account_api_key):
         try:
             response = requests.delete(self.base_url + '/subaccount/' + urllib.parse.quote(str(sub_account_api_key), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
     
     def check_user_exists(self, user_id):
         try:
             response = requests.get(self.base_url + '/users/' + urllib.parse.quote(str(user_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def delete_user(self, user_id):
         try:
             response = requests.delete(self.base_url + '/users/' + urllib.parse.quote(str(user_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_groups_for_user(self, user_id):
         try:
             response = requests.get(self.base_url + '/users/' + urllib.parse.quote(str(user_id), safe="") + '/groups' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_all_groups(self):
         try:
             response = requests.get(self.base_url + '/groups' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_group(self, group_id):
         try:
             response = requests.get(self.base_url + '/groups/' + urllib.parse.quote(str(group_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def group_exists(self, group_id):
         try:
             response = requests.get(self.base_url + '/groups/' + urllib.parse.quote(str(group_id), safe="") + '/exists' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_group(self, group_desc):
         dataObj = {}
@@ -131,7 +131,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/groups' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def add_user_to_group(self, group_id, user_id):
         dataObj = {}
@@ -141,7 +141,7 @@ class VoiceIt3:
             response = requests.put(self.base_url + '/groups/addUser' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def remove_user_from_group(self, group_id, user_id):
         dataObj = {}
@@ -151,35 +151,35 @@ class VoiceIt3:
             response = requests.delete(self.base_url + '/groups/removeUser' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def delete_group(self, group_id):
         try:
             response = requests.delete(self.base_url + '/groups/' + urllib.parse.quote(str(group_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_all_face_enrollments(self, user_id):
         try:
             response = requests.get(self.base_url + '/enrollments/face/' + urllib.parse.quote(str(user_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_all_voice_enrollments(self, user_id):
         try:
             response = requests.get(self.base_url + '/enrollments/voice/' + urllib.parse.quote(str(user_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def get_all_video_enrollments(self, user_id):
         try:
             response = requests.get(self.base_url + '/enrollments/video/' + urllib.parse.quote(str(user_id), safe="") + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_voice_enrollment(self, user_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -199,7 +199,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -214,7 +214,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/voice/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_face_enrollment(self, user_id, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -232,7 +232,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -245,7 +245,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/face/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_video_enrollment(self, user_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -265,7 +265,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -280,14 +280,14 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/enrollments/video/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def delete_all_enrollments(self, user_id):
         try:
             response = requests.delete(self.base_url + '/enrollments/' + urllib.parse.quote(str(user_id), safe="") + '/all' + self.notification_url, auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-                return e.read()
+                return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def voice_verification(self, user_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -307,7 +307,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -322,7 +322,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/voice/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def face_verification(self, user_id, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -340,7 +340,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -353,7 +353,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/face/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def video_verification(self, user_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -373,7 +373,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -388,7 +388,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/verification/video/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def voice_identification(self, group_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -408,7 +408,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/voice' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -423,7 +423,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/voice/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def video_identification(self, group_id, lang, phrase, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -443,7 +443,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/video' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -458,7 +458,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/video/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def face_identification(self, group_id, file_path=None, file_buffer=None):
         if not file_path and not file_buffer:
@@ -476,7 +476,7 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/face' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, files=filesObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
         finally:
             if owned:
                 f.close()
@@ -489,18 +489,18 @@ class VoiceIt3:
             response = requests.post(self.base_url + '/identification/face/byUrl' + self.notification_url, auth=self.voiceit_basic_auth_credentials, data=dataObj, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def create_user_token(self, user_id, seconds_to_timeout):
         try:
-            response = requests.post(self.base_url + '/users/' + user_id + '/token' + '?timeOut=' + str(seconds_to_timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
+            response = requests.post(self.base_url + '/users/' + urllib.parse.quote(str(user_id), safe="") + '/token' + '?timeOut=' + str(seconds_to_timeout), auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}
 
     def expire_user_tokens(self, user_id):
         try:
-            response = requests.post(self.base_url + '/users/' + user_id + '/expireTokens', auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
+            response = requests.post(self.base_url + '/users/' + urllib.parse.quote(str(user_id), safe="") + '/expireTokens', auth=self.voiceit_basic_auth_credentials, headers=self.headers, timeout=self.timeout)
             return response.json()
         except requests.exceptions.HTTPError as e:
-            return e.read()
+            return e.response.json() if e.response is not None else {"responseCode": "FAIL", "message": str(e)}

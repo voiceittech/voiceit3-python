@@ -1,1 +1,1 @@
-from .voiceit3 import VoiceIt3
+from .voiceit3 import voiceit3

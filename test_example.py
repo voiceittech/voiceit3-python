@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Full API test: create user, video enroll x3, video verify, cleanup"""
 import os, sys
-from voiceit3 import VoiceIt3
+from voiceit3 import voiceit3
 
 api_key = os.environ.get("VOICEIT_API_KEY", "")
 api_token = os.environ.get("VOICEIT_API_TOKEN", "")
 if not api_key or not api_token:
     print("Set VOICEIT_API_KEY and VOICEIT_API_TOKEN"); sys.exit(1)
 
-vi = VoiceIt3(api_key, api_token)
+vi = voiceit3(api_key, api_token)
 phrase = "Never forget tomorrow is a new day"
 td = "test-data"
 errors = 0
